@@ -265,14 +265,14 @@ div.input-mask {
  * Sidebar
  */
 #sidebar-wrapper {
-  background: #30426a;
+  background: #1a2b2b;
 }
 ul.sidebar .sidebar-main a,
 .sidebar-footer,
 ul.sidebar .sidebar-list a:hover,
 #page-wrapper:not(.open) ul.sidebar .sidebar-title.separator {
   /* Sidebar header and footer color */
-  background: #2d3e63;
+  background: #121e1e;
 }
 ul.sidebar {
   position: absolute;
@@ -298,7 +298,7 @@ ul.sidebar .sidebar-main {
 ul.sidebar .sidebar-main a {
   font-size: 18px;
   line-height: 60px;
-  color: #d8d8d8
+  color: #d8d8d8;
 	font-weight: 700;
 	letter-spacing: 4px;
 }
@@ -356,7 +356,7 @@ ul.sidebar .sidebar-list .menu-icon {
   margin: 13px 0;
 }
 #page-wrapper:not(.open) ul.sidebar .sidebar-list a:hover span {
-  border-left: 3px solid #e99d1a;
+  border-left: 3px solid #A50909;
   text-indent: 22px;
 }
 #page-wrapper:not(.open) .sidebar-footer {
