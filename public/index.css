@@ -202,7 +202,7 @@ html {
   overflow-y: scroll;
 }
 body {
-  background: #f3f3f3;
+  background: #fff;
   font-family: "Lato";
   color: #1a2b2b !important;
 }
@@ -252,9 +252,11 @@ div.input-mask {
 }
 
 
-/* #592727 RED */
-/* #2f5927 GREEN */
-/* #30426a BLUE (default)*/
+/* #1A2B2B Dark */
+/* #661111 Dark red */
+/* #A50909 Red */
+/* #AEB39A Light green-grey */
+/* #D8D8D8 Light grey */
 /* Sidebar background color */
 /* Sidebar header and footer color */
 /* Sidebar title text colour */
@@ -296,6 +298,9 @@ ul.sidebar .sidebar-main {
 ul.sidebar .sidebar-main a {
   font-size: 18px;
   line-height: 60px;
+  color: #d8d8d8
+	font-weight: 700;
+	letter-spacing: 4px;
 }
 ul.sidebar .sidebar-main a:hover {
   cursor: pointer;
@@ -307,7 +312,7 @@ ul.sidebar .sidebar-main .menu-icon {
   line-height: 60px;
 }
 ul.sidebar .sidebar-title {
-  color: #738bc0;
+  color: #d8d8d8;
   font-size: 12px;
   height: 35px;
   line-height: 40px;
@@ -320,12 +325,12 @@ ul.sidebar .sidebar-list {
 ul.sidebar .sidebar-list a {
   text-indent: 25px;
   font-size: 15px;
-  color: #b2bfdc;
+  color: #d8d8d8;
   line-height: 40px;
 }
 ul.sidebar .sidebar-list a:hover {
   color: #fff;
-  border-left: 3px solid #e99d1a;
+  border-left: 3px solid #A50909;
   text-indent: 22px;
 }
 ul.sidebar .sidebar-list a:hover .menu-icon {
@@ -368,7 +373,7 @@ ul.sidebar .sidebar-list .menu-icon {
   text-align: center;
 }
 .sidebar-footer div a {
-  color: #b2bfdc;
+  color: #d8d8d8;
   font-size: 12px;
   line-height: 43px;
 }
