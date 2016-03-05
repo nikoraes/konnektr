@@ -1,8 +1,8 @@
 // Copyright: 2013, Jochen Eddelbüttel
 // MIT License applies
 //
-angular.module('CornerCouch', ['ng']).
-factory('cornercouch', ['$http', function($http) { 'use strict';
+angular.module('CornerCouch', ['ng'])
+	.factory('cornercouch', ['$http', function($http) { 'use strict';
 
     // Shorthand angular
     var ng = angular;

@@ -16,11 +16,13 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.7/smart-table.min.js"></script>
-	<script src="modules/cornercouch/angular-cornercouch.js"></script>
+	<script src="app/index.js"></script>
+	<script src="app/main.js"></script>
+	<script src="app/cornercouch/angular-cornercouch.js"></script>
 </head>
    
   
-<body ng-controller="MasterCtrl">
+<body ng-controller="MainCtrl">
 
   <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
 
@@ -30,7 +32,7 @@
         <li class="sidebar-main">
           <a ng-click="toggleSidebar()">
             KONNEKTR.<small>IO</small>
-            <span class="menu-icon fa fa-bars"></span>
+            
           </a>
         </li>
         <li class="sidebar-title"><span>NAVIGATION</span></li>
@@ -38,7 +40,7 @@
           <a href="#">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#/tables">Explore <span class="menu-icon fa fa-table"></span></a>
+          <a href="#">Explore <span class="menu-icon fa fa-table"></span></a>
         </li>
       </ul>
     </div>
@@ -67,27 +69,3 @@
   </div><!-- End Page Wrapper -->
 </body>
 </html>
-
-
-
-
-		<nav class="navbar navbar-default navbar-fixed-top">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>                        
-		      </button>
-		      <a class="navbar-brand" href="#">KONNEKTR.<small>IO</small></a>
-		    </div>
-		    <div class="collapse navbar-collapse" id="myNavbar">
-		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#">Input</a></li>
-		        <li class="active"><a href="#">Explore</a></li>
-		        <li><a href="#">Visualize</a></li>
-		      </ul>
-		    </div>
-		  </div>
-		</nav>
-

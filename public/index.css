@@ -191,7 +191,7 @@
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   @font-face {
-    font-family: 'Montserrat';
+    font-family: 'Lato';
   }
   select {
     font-family: Arial, Helvetica, sans-serif;
