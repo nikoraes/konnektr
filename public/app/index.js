@@ -3,5 +3,8 @@ angular.module('konnektr', [
 	'ui.bootstrap',
 	'ui.router',
 	'CornerCouch',
-	'konnektr.main'
+	'konnektr.main',
+	'konnektr.dashboard',
+	'konnektr.explore',
+	'konnektr.visualize'
 	]);
