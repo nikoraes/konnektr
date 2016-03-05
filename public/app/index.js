@@ -4,6 +4,7 @@ angular.module('konnektr', [
 	'ui.router',
 	'CornerCouch',
 	'konnektr.main',
+	'konnektr.common',
 	'konnektr.dashboard',
 	'konnektr.explore',
 	'konnektr.visualize'

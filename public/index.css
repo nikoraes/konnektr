@@ -63,13 +63,8 @@
   padding-right: 0;
 }
 .row.header .meta .page {
-  /**font-size: 17px;
-  padding-top: 11px;**/  
   font-size: 18px;
   line-height: 60px;
-}
-.row.header .meta .breadcrumb-links {
-  font-size: 10px;
 }
 .row.header .meta div {
   white-space: nowrap;
