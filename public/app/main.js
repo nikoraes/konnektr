@@ -26,5 +26,8 @@ angular.module('konnektr.main', [])
 		    window.onresize = function() {
 		        $scope.$apply();
 		    };
-		}
-]);
+		}])
+		
+	.config(function($urlRouterProvider) {
+	  $urlRouterProvider.otherwise("/dashboard");
+	});	

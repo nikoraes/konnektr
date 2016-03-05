@@ -13,13 +13,17 @@
   <link rel="stylesheet" href="index.css">
   
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js"></script>
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js"></script> -->
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.7/smart-table.min.js"></script>
 	<script src="app/index.js"></script>
 	<script src="app/main.js"></script>
 	<script src="app/cornercouch/angular-cornercouch.js"></script>
+	<script src="app/dashboard/dashboard.js"></script>
+	<script src="app/explore/explore.js"></script>
+	<script src="app/visualize/visualize.js"></script>
 </head>
    
   
@@ -37,10 +41,13 @@
           </a>
         </li>
         <li class="sidebar-list">
-          <a href="#">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+          <a ui-sref="dashboard">Dashboard <span class="menu-icon fa fa-dashboard"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#">Explore <span class="menu-icon fa fa-table"></span></a>
+          <a ui-sref="explore">Explore <span class="menu-icon fa fa-table"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a ui-sref="visualize">Visualize <span class="menu-icon fa fa-area-chart"></span></a>
         </li>
       </ul>
     </div>
@@ -48,21 +55,6 @@
 
     <div id="content-wrapper">
       <div class="page-content">
-
-        <!-- Header Bar -->
-        <div class="row header">
-          <div class="col-xs-12">
-            <div class="meta">
-              <div class="page">
-                Dashboard
-              </div>
-              <div class="breadcrumb-links">
-                Home / Dashboard
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Header Bar -->
 
         <!-- Main Content -->
         <div ui-view></div>
