@@ -1,4 +1,5 @@
-angular.module('konnektr.main')
+angular.module('konnektr.main', [])
+
   .controller('MainCtrl', ['$scope', 
 		function ($scope) {
 		    /**
