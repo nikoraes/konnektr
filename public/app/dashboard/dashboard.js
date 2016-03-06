@@ -6,7 +6,7 @@ angular.module('konnektr.dashboard', [])
 		    .state('dashboard', {
 		      url: "/dashboard",
 		      templateUrl: "app/dashboard/dashboard.html",
-		      controller: 'DashboardCtrl',
+/**		      controller: 'DashboardCtrl', **/
 		      resolve: {
 		      	$title: function() { return 'Dashboard'; }
 		      }
