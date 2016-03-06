@@ -31,9 +31,10 @@ angular.module('konnektr.user.login', [])
 	          $scope.server.getUUIDs(3);
 	          $scope.server.getUserDoc();
 	          $scope.server.getUserDB();
+	          $scope.konnektrdata.getInfo();
+	          $scope.testdoc = $scope.konnektrdata.getDoc("nikoraes-openhab-00000");
 					});
-	    };	
-	    $scope.testdoc = $scope.konnektrdata.getDoc("nikoraes-openhab-00000");
+	    };		    
 		}])
 			
 ;	
