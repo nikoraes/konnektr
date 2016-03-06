@@ -4,6 +4,9 @@ angular.module('konnektr.explore', [])
 		$stateProvider
 	    .state('explore', {
 	      url: "/explore",
-	      templateUrl: "app/explore/explore.html"
+	      templateUrl: "app/explore/explore.html",
+	      resolve: {
+	      	$title: function() { return 'Explore'; }
+	      }
 	    });
 	});	

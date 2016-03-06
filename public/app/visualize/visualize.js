@@ -4,6 +4,9 @@ angular.module('konnektr.visualize', [])
 		$stateProvider
 	    .state('visualize', {
 	      url: "/visualize",
-	      templateUrl: "app/visualize/visualize.html"
+	      templateUrl: "app/visualize/visualize.html",
+	      resolve: {
+	      	$title: function() { return 'Visualize'; }
+	      }
 	    });
 	});	

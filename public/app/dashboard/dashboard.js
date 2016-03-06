@@ -4,6 +4,9 @@ angular.module('konnektr.dashboard', [])
 	  $stateProvider
 	    .state('dashboard', {
 	      url: "/dashboard",
-	      templateUrl: "app/dashboard/dashboard.html"
+	      templateUrl: "app/dashboard/dashboard.html",
+	      resolve: {
+	      	$title: function() { return 'Dashboard'; }
+	      }
 	    });
 	});	

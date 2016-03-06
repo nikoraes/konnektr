@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>konnektr</title>
+  <title ng-bind="($title || 'Home') + ' - konnektr'">konnektr</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -20,8 +20,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.7/smart-table.min.js"></script>
 	<script src="app/index.js"></script>
 	<script src="app/main.js"></script>
+	<script src="app/common/ui-router-title.js"></script>
 	<script src="app/common/loading.js"></script>
-	<script src="app/cornercouch/angular-cornercouch.js"></script>
+	<script src="app/common/cornercouch.js"></script>
 	<script src="app/dashboard/dashboard.js"></script>
 	<script src="app/explore/explore.js"></script>
 	<script src="app/visualize/visualize.js"></script>
@@ -56,6 +57,50 @@
 
     <div id="content-wrapper">
       <div class="page-content">
+
+				<!-- Header Bar -->
+				<div class="row header">
+				
+				  <div class="col-xs-12">
+						<div class="user pull-right">
+						  <div class="item dropdown" uib-dropdown>
+						    <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+						      <i class="fa fa-user"></i>
+						    </a>
+						    <ul class="dropdown-menu dropdown-menu-right">
+						      <li class="dropdown-header">
+						        Niko Raes
+						      </li>
+						      <li class="divider"></li>
+						      <li class="link">
+						        <a href="#">
+						          Profile
+						        </a>
+						      </li>
+						      <li class="link">
+						        <a href="#">
+						          Menu Item
+						        </a>
+						      </li>
+						      <li class="divider"></li>
+						      <li class="link">
+						        <a href="#">
+						          Logout
+						        </a>
+						      </li>
+						    </ul>
+						  </div>
+						</div>
+				  
+				    <div class="meta">
+				      <div class="page">
+				        $title
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- End Header Bar -->
+
 
         <!-- Main Content -->
         <div ui-view></div>
