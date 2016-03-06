@@ -13,3 +13,13 @@
 </form>
 <!-- <a ui-sref="register()">Click here to Register</a> -->
 </div>
+
+<div class="alert alert-info" ng-show='showInfo'>
+    <button class='btn' ng-click='server.logout()'>Logout</button>
+    <br><br>
+    <pre>server.userCtx = {{ server.userCtx | json }}</pre>
+    <pre>server.info = {{ server.info | json }}</pre>
+    <pre>server.databases = {{ server.databases | json }}</pre>
+    <pre>server.uuids = {{ server.uuids | json }}</pre>
+    <pre>server.userDoc = {{ server.userDoc | json }}</pre>
+</div>
