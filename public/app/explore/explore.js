@@ -1,12 +1,17 @@
 angular.module('konnektr.explore', [])
 		
-	.config(function($stateProvider, $urlRouterProvider) {
-		$stateProvider
-	    .state('explore', {
-	      url: "/explore",
-	      templateUrl: "app/explore/explore.html",
-	      resolve: {
-	      	$title: function() { return 'Explore'; }
-	      }
-	    });
-	});	
+	.config(['$stateProvider', '$urlRouterProvider',
+		function($stateProvider, $urlRouterProvider) {
+			$stateProvider
+		    .state('explore', {
+		      url: "/explore",
+		      templateUrl: "app/explore/explore.html",
+		      data: {
+			      requiresLogin: true
+			    },
+		      resolve: {
+		      	$title: function() { return 'Explore'; }
+		      }
+		    });
+		}])
+;	
