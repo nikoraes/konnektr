@@ -6,21 +6,19 @@ angular.module('konnektr.dashboard', [])
 		    .state('dashboard', {
 		      url: "/dashboard",
 		      templateUrl: "app/dashboard/dashboard.html",
-		      /**controller: 'DashboardCtrl', **/
+		      controller: 'DashboardCtrl', 
 		      resolve: {
 		      	$title: function() { return 'Dashboard'; }
 		      }
 		    });
 		}])
 
-/**
-  .controller('DashboardCtrl', ['$scope', 'store', 'jwtHelper',
-		function ($scope, store, jwtHelper) {
-		  $scope.jwt = store.get('jwt');
-		  $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
-		}])
-**/		
-	
+
+  .controller('DashboardCtrl', ['$scope', 
+		function ($scope) {
+		  $scope.mainserver = $scope.server;
+		  $scope.maindb = $scope.db;
+		}])	
 	
 ;	
 	
