@@ -30,8 +30,7 @@ angular.module('konnektr.user.login', [])
 			            $scope.server.getUUIDs(3);
 			            $scope.server.getUserDoc();
 			        });
-			    };
-		  
+			    };	  
 		}])
 			
 ;	
