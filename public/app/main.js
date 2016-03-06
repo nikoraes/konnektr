@@ -8,8 +8,10 @@ angular.module('konnektr.main', [])
 		    return store.get('jwt');
 		  }		
 		  $httpProvider.interceptors.push('jwtInterceptor');
+**/
 		}])
-				
+
+/**				
 	.run(['$rootScope', '$state', 'store', 'jwtHelper',
 		function($rootScope, $state, store, jwtHelper) {
 		  $rootScope.$on('$stateChangeStart', function(e, to) {
