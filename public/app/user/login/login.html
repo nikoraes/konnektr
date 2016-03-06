@@ -1,5 +1,4 @@
 <div class="login jumbotron center-block">
-  <h1>Login</h1>
   <form role="form">
   <div class="form-group">
     <label for="username">Username</label>
@@ -22,5 +21,9 @@
     <pre>server.databases = {{ server.databases | json }}</pre>
     <pre>server.uuids = {{ server.uuids | json }}</pre>
     <pre>server.userDoc = {{ server.userDoc | json }}</pre>
-    <pre>server.userDoc = {{ server.userDB | json }}</pre>
+    <pre>server.userDB = {{ server.userDB | json }}</pre>
+</div>
+
+<div class="alert alert-info" ng-show='showInfo'>
+    <pre>server.testdoc = {{ server.testdoc | json }}</pre>
 </div>
