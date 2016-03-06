@@ -6,6 +6,7 @@ angular.module('konnektr.explore', [])
 		    .state('explore', {
 		      url: "/explore",
 		      templateUrl: "app/explore/explore.html",
+		      controller: 'ExploreCtrl',
 		      data: {
 			      requiresLogin: true
 			    },
@@ -14,4 +15,12 @@ angular.module('konnektr.explore', [])
 		      }
 		    });
 		}])
+		
+  .controller('ExploreCtrl', ['$scope',
+		function ($scope) {
+		  $scope.testdoc = $scope.db.getDoc("nikoraes-openhab-00000");
+		}])		
+		
+		
+		
 ;	

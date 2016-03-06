@@ -2,17 +2,17 @@
   <form role="form">
   <div class="form-group">
     <label for="username">Username</label>
-    <input type="text" class="form-control" ng-model="user.username" id="username" placeholder="Username">
+    <input type="text" class="form-control" id="username"  ng-model="main.user.username" placeholder="Username">
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" ng-model="user.password" placeholder="Password">
+    <input type="password" class="form-control" id="password" ng-model="main.user.password" placeholder="Password">
   </div>
-  <button type="submit" class="btn btn-default" ng-click="submitLogin()">Submit</button>
+  <button type="submit" class="btn btn-default" ng-click="main.submitLogin()">Submit</button>
 </form>
 <!-- <a ui-sref="register()">Click here to Register</a> -->
 </div>
-
+<!--
 <div class="alert alert-info" ng-show='showInfo'>
     <button class='btn' ng-click='server.logout()'>Logout</button>
     <br><br>
@@ -21,3 +21,4 @@
     <pre>konnektrdata.info = {{ konnektrdata.info | json }}</pre>
     <pre>testdoc = {{ testdoc | json }}</pre>
 </div>
+-->

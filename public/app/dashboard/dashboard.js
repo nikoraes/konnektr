@@ -6,7 +6,7 @@ angular.module('konnektr.dashboard', [])
 		    .state('dashboard', {
 		      url: "/dashboard",
 		      templateUrl: "app/dashboard/dashboard.html",
-/**		      controller: 'DashboardCtrl', **/
+		      /**controller: 'DashboardCtrl', **/
 		      resolve: {
 		      	$title: function() { return 'Dashboard'; }
 		      }
@@ -20,7 +20,8 @@ angular.module('konnektr.dashboard', [])
 		  $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
 		}])
 **/		
-		
+	
+	
 ;	
 	
 	

@@ -6,13 +6,13 @@ angular.module('konnektr.user.login', [])
 		    .state('login', {
 		      url: "/login",
 		      templateUrl: "app/user/login/login.html",
-		      controller: 'LoginCtrl',
+		      /**controller: 'LoginCtrl',**/
 		      resolve: {
 		      	$title: function() { return 'Login'; }
 		      }
 		    });
 		}])
-
+/**
   .controller('LoginCtrl', ['$scope', 'cornercouch',
 		function ($scope, cornercouch) {
 		  $scope.user = {};
@@ -32,7 +32,7 @@ angular.module('konnektr.user.login', [])
 					});
 	    };		    
 		}])
-			
+**/	
 ;	
 	
 	
