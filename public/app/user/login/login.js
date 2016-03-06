@@ -27,10 +27,6 @@ angular.module('konnektr.user.login', [])
 	          $scope.user.username = $scope.user.password = '';
 	          $scope.showInfo = true;
 	          $scope.server.getInfo();
-	          $scope.server.getDatabases();
-	          $scope.server.getUUIDs(3);
-	          $scope.server.getUserDoc();
-	          $scope.server.getUserDB();
 	          $scope.konnektrdata.getInfo();
 	          $scope.testdoc = $scope.konnektrdata.getDoc("nikoraes-openhab-00000");
 					});

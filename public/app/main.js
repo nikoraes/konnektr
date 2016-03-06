@@ -25,28 +25,37 @@ angular.module('konnektr.main', [])
 		}])
 **/
 
-  .controller('MainCtrl', ['$scope', 
-		function ($scope) {
-		    /**
-		     * Sidebar Toggle
-		     */
-		    var mobileView = 992;		
-		    $scope.getWidth = function() {
-		        return window.innerWidth;
-		    };		
-		    $scope.$watch($scope.getWidth, function(newValue, oldValue) {
-		        if (newValue >= mobileView) {
-		            $scope.toggle = true;
-		        } else {
-		            $scope.toggle = false;
-		        }
-		    });		
-		    $scope.toggleSidebar = function() {
-		        $scope.toggle = !$scope.toggle;
-		    };		
-		    window.onresize = function() {
-		        $scope.$apply();
-		    };
+  .controller('MainCtrl', ['$scope', 'cornercouch', 
+		function ($scope, cornercouch) {
+
+			/** Cloudant session **/
+			$scope.server = cornercouch("https://7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com", "GET");
+			$scope.server.session();
+			$scope.db = $scope.server.getDB('konnektr-data');
+			$scope.db.getInfo();
+
+	    /** Sidebar Toggle **/
+	    var mobileView = 992;		
+	    $scope.getWidth = function() {
+	        return window.innerWidth;
+	    };		
+	    $scope.$watch($scope.getWidth, function(newValue, oldValue) {
+	        if (newValue >= mobileView) {
+	            $scope.toggle = true;
+	        } else {
+	            $scope.toggle = false;
+	        }
+	    });		
+	    $scope.toggleSidebar = function() {
+	        $scope.toggle = !$scope.toggle;
+	    };		
+	    window.onresize = function() {
+	        $scope.$apply();
+	    };
+		    
+		    
+		    
+		    
 		}])
 
 ;
