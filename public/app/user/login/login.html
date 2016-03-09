@@ -1,22 +1,40 @@
-<div class="login jumbotron center-block">
-  <form role="form">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" id="username"  ng-model="main.user.username" placeholder="Username">
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" class="form-control" id="password" ng-model="main.user.password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn btn-default" ng-click="main.submitLogin()">Submit</button>
-</form>
-<!-- <a ui-sref="register()">Click here to Register</a> -->
-</div>
+<div class="col-md-4 col-md-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        	Login
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="username" class="col-sm-3 control-label">Username</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="username"  ng-model="main.user.username" placeholder="Username" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-3 control-label">Password</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="password" ng-model="main.user.password" placeholder="Password" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <label class="">
+                                <input type="checkbox" class="">Remember me</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group last">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-success btn-sm">Sign in</button>
+                        <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">Not Registered? <a href="#" class="">Register here</a>
 
-<div class="alert alert-info" ng-show='main.showInfo'>
-    <button class='btn' ng-click='main.server.logout()'>Logout</button>
-    <br><br>
-    <pre>main.server.userCtx = {{ main.server.userCtx | json }}</pre>
-    <pre>main.server.info = {{ main.server.info | json }}</pre>
-    <pre>main.db.info = {{ main.db.info | json }}</pre>
+        </div>
+    </div>
 </div>
