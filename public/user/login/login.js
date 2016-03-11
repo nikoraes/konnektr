@@ -33,7 +33,7 @@ angular.module('konnektr.user.login', [])
 	    };		    
 		}])
 **/	
-
+/**
 	.directive('loginDialog', function (AUTH_EVENTS) {
 	  return {
 	    restrict: 'A',
@@ -65,7 +65,7 @@ angular.module('konnektr.user.login', [])
 	    });
 	  };
 	})
-
+**/
 
 ;	
 	

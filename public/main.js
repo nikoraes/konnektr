@@ -24,7 +24,7 @@ angular.module('konnektr.main', [])
 		  });
 		}])
 **/
-
+/**
 	.run(function ($rootScope, AUTH_EVENTS, AuthService) {
 	  $rootScope.$on('$stateChangeStart', function (event, next) {
 	    var authorizedRoles = next.data.authorizedRoles;
@@ -65,7 +65,7 @@ angular.module('konnektr.main', [])
 	  };
 	})
 
-
+**/
 
 
 
@@ -94,8 +94,8 @@ angular.module('konnektr.main', [])
 
 
 
-	.factory('AuthService', [ '$http', 'Session', 'cornercouch',
-		function ($http, Session, cornercouch) {
+	.factory('AuthService', [ '$http', 'COUCHDB', 'Session', 'cornercouch',
+		function ($http, COUCHDB, Session, cornercouch) {
 		  var authService = {};
 		  var server = cornercouch(COUCHDB.url, COUCHDB.method);
 		 
