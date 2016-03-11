@@ -6,9 +6,9 @@ angular.module('konnektr.visualize', [])
 		    .state('visualize', {
 		      url: "/visualize",
 		      templateUrl: "visualize/visualize.html",
-		      data: {
+/**		      data: {
 			      authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-			    },
+			    },**/
 		      resolve: {
 		      	$title: function() { return 'Visualize'; }
 		      }

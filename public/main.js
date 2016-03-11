@@ -67,7 +67,7 @@ angular.module('konnektr.main', [])
 
 **/
 
-
+/**
 
 	.constant('AUTH_EVENTS', {
 	  loginSuccess: 'auth-login-success',
@@ -165,7 +165,7 @@ angular.module('konnektr.main', [])
 	          $scope.db.getInfo();
 					});
 	    };		 
-**/
+
 
 
 
@@ -178,7 +178,7 @@ angular.module('konnektr.main', [])
 		  };
 
 
-
+**/
 
 
 

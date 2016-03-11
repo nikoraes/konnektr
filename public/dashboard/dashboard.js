@@ -6,20 +6,20 @@ angular.module('konnektr.dashboard', [])
 		    .state('dashboard', {
 		      url: "/dashboard",
 		      templateUrl: "dashboard/dashboard.html",
-		      controller: 'DashboardCtrl', 
+		      /**controller: 'DashboardCtrl', **/
 		      resolve: {
 		      	$title: function() { return 'Dashboard'; }
 		      }
 		    });
 		}])
 
-
+/**
   .controller('DashboardCtrl', ['$scope', 
 		function ($scope) {
 		  $scope.mainserver = $scope.server;
 		  $scope.maindb = $scope.db;
 		}])	
-	
+	**/
 ;	
 	
 	
