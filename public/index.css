@@ -253,20 +253,7 @@ div.input-mask {
  * Panels
  */
 .panel {
-    border: 1px solid #1a2b2b; 
     border-radius:0;
-}
-.panel-heading {
-    color: #d8d8d8 !important;
-    background-color: #1a2b2b !important;
-    border-bottom: 1px solid transparent;
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
-.panel-footer {
-    background-color: #fff !important;
 }
 /**
  * Forms

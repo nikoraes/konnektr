@@ -11,7 +11,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Lato" >
   <link rel="stylesheet" href="index.css">
-  <link rel="stylesheet" href="app/user/login/login.css">
   
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js"></script> -->
@@ -21,15 +20,16 @@
 	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.7/smart-table.min.js"></script> -->
 	<script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
 	<script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
-	<script src="app/app.js"></script>
-	<script src="app/main.js"></script>
-	<script src="app/common/ui-router-title.js"></script>
-	<script src="app/common/loading.js"></script>
-	<script src="app/common/cornercouch.js"></script>
-	<script src="app/user/login/login.js"></script>
-	<script src="app/dashboard/dashboard.js"></script>
-	<script src="app/explore/explore.js"></script>
-	<script src="app/visualize/visualize.js"></script>
+	<script src="app.js"></script>
+	<script src="main.js"></script>
+	<script src="common/ui-router-title.js"></script>
+	<script src="common/loading.js"></script>
+	<script src="common/cornercouch.js"></script>
+	<script src="user/login/login.js"></script>
+	<script src="home/home.js"></script>
+	<script src="dashboard/dashboard.js"></script>
+	<script src="explore/explore.js"></script>
+	<script src="visualize/visualize.js"></script>
 </head>
    
   
@@ -45,6 +45,9 @@
             KONNEKTR
             <span class="menu-icon fa fa-bars">
           </a>
+        </li>
+        <li class="sidebar-list">
+          <a ui-sref="home" ui-sref-active="active">Home <span class="menu-icon fa fa-dashboard"></span></a>
         </li>
         <li class="sidebar-list">
           <a ui-sref="dashboard" ui-sref-active="active">Dashboard <span class="menu-icon fa fa-dashboard"></span></a>
@@ -112,5 +115,8 @@
       </div><!-- End Page Content -->
     </div><!-- End Content Wrapper -->
   </div><!-- End Page Wrapper -->
+  
+<div login-dialog ng-if="!isLoginPage"></div>
+  
 </body>
 </html>

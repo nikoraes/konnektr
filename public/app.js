@@ -9,6 +9,7 @@ angular.module('konnektr', [
 	'konnektr.main',
 	'konnektr.common',
 	'konnektr.user.login',
+	'konnektr.home',
 	'konnektr.dashboard',
 	'konnektr.explore',
 	'konnektr.visualize'

@@ -5,7 +5,7 @@ angular.module('konnektr.user.login', [])
 		  $stateProvider
 		    .state('login', {
 		      url: "/login",
-		      templateUrl: "app/user/login/login.html",
+		      templateUrl: "user/login/login.html",
 		      /**controller: 'LoginCtrl',**/
 		      resolve: {
 		      	$title: function() { return 'Login'; }
@@ -33,6 +33,40 @@ angular.module('konnektr.user.login', [])
 	    };		    
 		}])
 **/	
+
+	.directive('loginDialog', function (AUTH_EVENTS) {
+	  return {
+	    restrict: 'A',
+	    template: '<div ng-if="visible" ng-include="user/login/login.html">',
+	    link: function (scope) {
+	      var showDialog = function () {
+	        scope.visible = true;
+	      };
+	  
+	      scope.visible = false;
+	      scope.$on(AUTH_EVENTS.notAuthenticated, showDialog);
+	      scope.$on(AUTH_EVENTS.sessionTimeout, showDialog)
+	    }
+	  };
+	})
+
+
+	.controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService) {
+	  $scope.credentials = {
+	    username: '',
+	    password: ''
+	  };
+	  $scope.login = function (credentials) {
+	    AuthService.login(credentials).then(function (user) {
+	      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+	      $scope.setCurrentUser(user);
+	    }, function () {
+	      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+	    });
+	  };
+	})
+
+
 ;	
 	
 	

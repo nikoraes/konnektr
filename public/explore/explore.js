@@ -5,10 +5,10 @@ angular.module('konnektr.explore', [])
 			$stateProvider
 		    .state('explore', {
 		      url: "/explore",
-		      templateUrl: "app/explore/explore.html",
+		      templateUrl: "explore/explore.html",
 		      controller: 'ExploreCtrl',
 		      data: {
-			      requiresLogin: true
+			      authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
 			    },
 		      resolve: {
 		      	$title: function() { return 'Explore'; }
