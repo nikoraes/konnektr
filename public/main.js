@@ -141,7 +141,7 @@ angular.module('konnektr.main', [])
 
 
 
-
+**/
   .controller('MainCtrl', ['$scope', 'cornercouch', 'USER_ROLES', 'AuthService',
 		function ($scope, cornercouch, USER_ROLES, AuthService) {
 			
