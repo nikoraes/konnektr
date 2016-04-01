@@ -6,6 +6,7 @@ angular.module('konnektr.home', [])
 		    .state('home', {
 		      url: "/home",
 		      templateUrl: "home/home.html",
+		      authenticate: true,
 		      resolve: {
 		      	$title: function() { return 'Home'; }
 		      }

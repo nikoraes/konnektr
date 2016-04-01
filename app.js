@@ -77,7 +77,7 @@ app.post('/api/register', function(request, response) {
 	
 	newuser.name  = request.body.username;
 	newuser.pass = request.body.password;
-	newuser.roles = ["_reader", "_writer"]
+	newuser.roles = ["_reader", "_writer"];
 
 	cloudantUser = new CloudantUser(server, adminuser);
 	cloudantUser.create.apply(cloudantUser, [newuser.name, newuser.pass].concat(slice.call(newuser.roles), [callback]));

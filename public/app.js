@@ -1,14 +1,13 @@
 /*globals angular */
 angular.module('konnektr', [
-	'ui.bootstrap',
+	'ngMaterial',
 	'ui.router',
 	'ui.router.title',
-	'CornerCouch',
-	'angular-jwt',
-  'angular-storage',
+	'angular-cornercouch',
 	'konnektr.main',
-	'konnektr.common',
 	'konnektr.user.login',
+	'konnektr.user.profile',
+	'konnektr.user.register',
 	'konnektr.home',
 	'konnektr.dashboard',
 	'konnektr.explore',

@@ -261,6 +261,44 @@ div.input-mask {
 .form-control {
     border-radius:0;
 }
+
+.login-form {
+	margin: 100px auto;
+	max-width: 400px;
+}
+form[role=login] {
+	font: 16px/1.6em Lato, serif;
+	padding: 15px 26px 50px 26px;
+	background: #fff;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+}
+form[role=login] h2 {
+	font-size: 20px;
+	color: #1A2B2B;
+	margin-bottom: 20px;
+}
+form[role=login] p {
+	color: #1A2B2B;
+	margin-bottom: 25px;
+}
+form[role=login] input,
+form[role=login] button,
+form[role=login] a.btn {
+	font-size: 16px;
+}
+form[role=login] a.btn {
+	margin: 16px 0;		
+}
+.input-group-addon {
+	border-radius: 0;
+	color: #1A2B2B;
+}
+
+
+
+
 /**
  * Buttons
  */

@@ -1,7 +1,7 @@
 // Copyright: 2013, Jochen Eddelbüttel
 // MIT License applies
 //
-angular.module('CornerCouch', ['ng'])
+angular.module('angular-cornercouch', ['ng'])
 	.factory('cornercouch', ['$http', function($http) { 'use strict';
 
     // Shorthand angular

@@ -6,21 +6,19 @@ angular.module('konnektr.explore', [])
 		    .state('explore', {
 		      url: "/explore",
 		      templateUrl: "explore/explore.html",
-		      /**controller: 'ExploreCtrl',
-		      data: {
-			      authorizedRoles: [USER_ROLES.admin, USER_ROLES.editor]
-			    },**/
+		      controller: 'ExploreCtrl', 
+			    authenticate: true,
 		      resolve: {
 		      	$title: function() { return 'Explore'; }
 		      }
 		    });
 		}])
-	/**	
+	
   .controller('ExploreCtrl', ['$scope',
 		function ($scope) {
-		  $scope.testdoc = $scope.db.getDoc("nikoraes-openhab-00000");
+
 		}])		
-		**/
+		
 		
 		
 ;	

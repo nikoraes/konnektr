@@ -1,120 +1,100 @@
-<!DOCTYPE html>
-<html lang="en" ng-app="konnektr">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title ng-bind="($title || 'Home') + ' - konnektr'">konnektr</title>
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Lato" >
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Lato" >
   
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-	<!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-resource.min.js"></script> -->
-	<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.min.js"></script> -->
+  <style>
+	  body{
+		  font-family: "Lato";
+		}
+	  md-toolbar .md-title {
+		  margin: auto;
+		  font-weight: 700;
+			letter-spacing: 4px;
+		}
+  </style>
+  
+</head>
+
+<body ng-app="konnektr" ng-controller="MainCtrl as main" ng-cloak layout="row">
+
+  <md-sidenav 
+  		class="site-sidenav md-sidenav-left md-whiteframe-z4"
+      md-component-id="left"
+      ng-click="main.toggleSidenav()" 
+      md-is-locked-open="$mdMedia('gt-sm')"
+      md-disable-backdrop>
+
+    <md-toolbar class="md-tall md-accent md-hue-3">
+    	<span flex></span>
+      <h1 class="md-toolbar-tools md-toolbar-tools-bottom">
+        <div>DATABASE</div>
+      </h1>
+    </md-toolbar>
+
+    <md-list class="md-hue-2" >
+      <md-list-item ng-click="$state.go('dashboard')">
+        <md-icon>dashboard</md-icon>
+        <p>Dashboard</p>
+      </md-list-item>
+      <md-list-item ng-click="$state.go('explore')">
+        <md-icon>explore</md-icon>
+        <p>Explore</p>
+      </md-list-item>
+    </md-list>
+
+  </md-sidenav>
+
+  <div flex layout="column" role="main">
+
+    <md-toolbar class="md-whiteframe-z4 md-hue-2" layout="row">
+    	<div class="md-toolbar-tools">
+	      <md-button class="md-icon-button" id="main" class="menu" hide-gt-sm ng-click="toggleSidenav()">
+	        <md-icon>menu</md-icon>
+	      </md-button>
+	      <h2 class="md-title">
+	        <span>KONNEKTR</span>
+	      </h2>
+	      <span flex></span>
+				<md-button class="md-icon-button">
+					<md-icon>more_vert</md-icon>
+				</md-button>
+			</div>
+    </md-toolbar>
+
+
+		<div ui-view></div>
+
+
+	</div>
+
+
+ 
+ 
+  
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>  
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.1.2/ui-bootstrap.min.js"></script>
-	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-smart-table/2.1.7/smart-table.min.js"></script> -->
-	<script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
-	<script type="text/javascript" src="https://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
+  
 	<script src="app.js"></script>
 	<script src="main.js"></script>
 	<script src="common/ui-router-title.js"></script>
-	<script src="common/loading.js"></script>
 	<script src="common/cornercouch.js"></script>
 	<script src="user/login/login.js"></script>
+	<script src="user/profile/profile.js"></script>
+	<script src="user/register/register.js"></script>
 	<script src="home/home.js"></script>
 	<script src="dashboard/dashboard.js"></script>
 	<script src="explore/explore.js"></script>
-	<script src="visualize/visualize.js"></script>
-</head>
-   
-  
-<body ng-controller="MainCtrl as main">
+	<script src="visualize/visualize.js"></script>  
 
-  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
-
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-      <ul class="sidebar">
-        <li class="sidebar-main">
-          <a ng-click="toggleSidebar()">
-            KONNEKTR
-            <span class="menu-icon fa fa-bars">
-          </a>
-        </li>
-        <li class="sidebar-list">
-          <a ui-sref="home" ui-sref-active="active">Home <span class="menu-icon fa fa-dashboard"></span></a>
-        </li>
-        <li class="sidebar-list">
-          <a ui-sref="dashboard" ui-sref-active="active">Dashboard <span class="menu-icon fa fa-dashboard"></span></a>
-        </li>
-        <li class="sidebar-list">
-          <a ui-sref="explore" ui-sref-active="active">Explore <span class="menu-icon fa fa-table"></span></a>
-        </li>
-        <li class="sidebar-list">
-          <a ui-sref="visualize" ui-sref-active="active">Visualize <span class="menu-icon fa fa-area-chart"></span></a>
-        </li>
-      </ul>
-    </div>
-    <!-- End Sidebar -->
-
-    <div id="content-wrapper">
-      <div class="page-content">
-
-				<!-- Header Bar -->
-				<div class="row header">
-				
-				  <div class="col-xs-12">
-						<div class="user pull-right">
-						  <div class="item dropdown" uib-dropdown>
-						    <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-						      <i class="fa fa-user"></i>
-						    </a>
-						    <ul class="dropdown-menu dropdown-menu-right">
-						      <li class="dropdown-header">
-						        Niko Raes
-						      </li>
-						      <li class="divider"></li>
-						      <li class="link">
-						        <a href="#">
-						          Profile
-						        </a>
-						      </li>
-						      <li class="link">
-						        <a ui-sref="login" ui-sref-active="active">
-						          Login
-						        </a>
-						      </li>
-						      <li class="divider"></li>
-						      <li class="link">
-						        <a href="#">
-						          Logout
-						        </a>
-						      </li>
-						    </ul>
-						  </div>
-						</div>
-				  
-				    <div class="meta">
-				      <div class="page" ng-bind="($title || 'Home')">
-				        Konnektr
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				<!-- End Header Bar -->
-
-
-        <!-- Main Content -->
-        <div ui-view></div>
-
-      </div><!-- End Page Content -->
-    </div><!-- End Content Wrapper -->
-  </div><!-- End Page Wrapper -->
-  
 </body>
 </html>

@@ -7,6 +7,7 @@ angular.module('konnektr.dashboard', [])
 		      url: "/dashboard",
 		      templateUrl: "dashboard/dashboard.html",
 		      /**controller: 'DashboardCtrl', **/
+		     	authenticate: true,
 		      resolve: {
 		      	$title: function() { return 'Dashboard'; }
 		      }
