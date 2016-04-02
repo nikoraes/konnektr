@@ -14,9 +14,10 @@ angular.module('konnektr.explore', [])
 		    });
 		}])
 	
-  .controller('ExploreCtrl', ['$scope',
-		function ($scope) {
-
+  .controller('ExploreCtrl', ['$scope', 'couch',
+		function ($scope, couch) {
+			$scope.db = couch.getDB();
+			$scope.db.query("konnektr-api", "assets", { include_docs: true });
 		}])		
 		
 		

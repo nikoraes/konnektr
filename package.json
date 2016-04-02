@@ -1,14 +1,21 @@
 {
-	"name": "NodejsStarterApp",
+	"name": "KonnektrApp",
 	"version": "0.0.1",
-    "private": true,
+  "private": true,
 	"scripts": {
 		"start": "node app.js"
 	},
 	"dependencies": {
 		"express": "4.13.x",
+		"ejs": "2.4.x",
 		"cfenv": "1.0.x",
-		"cloudant-user": "0.2.0"
+		"cloudant": "1.4.x",
+		"cloudant-user": "0.2.0",
+    "body-parser": "1.14.x",
+		"method-override": "2.3.x",
+    "morgan": "1.6.x",
+    "errorhandler": "1.4.x",
+    "connect-multiparty": "2.0.x"
 	},
 	"repository": {},
 	"engines": {

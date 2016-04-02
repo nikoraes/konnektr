@@ -25,6 +25,9 @@ var appEnv = cfenv.getAppEnv();
 var CloudantUser, adminuser, callback, cloudantUser, newuser, server,
   slice = [].slice;
 
+var db;
+var cloudant;
+
 CloudantUser = require("cloudant-user");
 
 function getVCAPCredentials() {
@@ -44,7 +47,7 @@ function getVCAPCredentials() {
 				break;
 			}
 		}
-		if(dbCredentials==null){
+		if(server==null){
 			console.warn('Could not find Cloudant credentials in VCAP_SERVICES environment variable - data will be unavailable to the UI');
 		}
 	} else{
@@ -65,24 +68,44 @@ function getVCAPCredentials() {
 
 callback = function(err, res) {
   if (err) {
+  	res.send('error');
     console.log(err);
   }
   if (res) {
+  	res.status(200).send('OK');
     return console.log(res);
   }
 };
 
+getVCAPCredentials();
 
-app.post('/api/register', function(request, response) {
+
+
+
+
+
+
+app.post('/api/register', function(req, res) {
 	
-	newuser.name  = request.body.username;
-	newuser.pass = request.body.password;
+	newuser.name  = req.body.username;
+	newuser.pass = req.body.password;
 	newuser.roles = ["_reader", "_writer"];
 
 	cloudantUser = new CloudantUser(server, adminuser);
 	cloudantUser.create.apply(cloudantUser, [newuser.name, newuser.pass].concat(slice.call(newuser.roles), [callback]));
+	
+	res.status(200).send('OK');
 
 });
+
+app.post('/api/createdb', function(req, res) {
+	
+	db  = req.body.dbname;
+
+});
+
+
+
 
 
 

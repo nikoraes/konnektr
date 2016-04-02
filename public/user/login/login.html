@@ -1,36 +1,48 @@
 <div flex layout="row" layout-align="center center" layout-margin>	
-  <div flex-sm="100" flex-gt-sm="90" flex-gt-md="60" flex-gt-lg="40" class="md-whiteframe-z2">
+  <div flex-sm="100" flex-gt-sm="60" flex-gt-md="40" flex-gt-lg="20" class="md-whiteframe-z2">
     <md-toolbar class="md-hue-2">
     	<span flex></span>
       <h1 class="md-toolbar-tools">
         <span class="md-flex">Login</span>
       </h1>
     </md-toolbar>
- 		<md-content layout-padding> 
+
     
-			<div flex layout-sm="column" layout-fill>
-				<form classrole="login" ng-submit="login()">
+		<div layout="column" class="md-inline-form">
+			 <md-content layout-padding> 
 
-					<md-input-container>
-						<label>Email</label>
-						<input type="text" ng-model="credentials.username" required>
-					</md-input-container>
+					<form name="loginForm">
+	
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Email</label>
+							<input type="text" ng-model="credentials.username" required>
+						</md-input-container>
+	
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Password</label>
+							<input type="password" ng-model="credentials.password" required>
+						</md-input-container>
+	
+						<div layout="row">
+							<md-button class="md-raised md-primary" ng-click="login()">Login</md-button>
+							<md-button class="md-primary" ng-click="$state.go('register')">Register</md-button>
+						</div>
 
-					<md-input-container>
-						<label>Password</label>
-						<input type="password" ng-model="credentials.password" required>
-					</md-input-container>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Database</label>
+							<input ng-model="dbname" required>
+						</md-input-container>
+
+						<div layout="row">
+							<md-button class="md-raised md-primary" ng-click="setdb()">Go</md-button>
+						</div>
+						
+					</form>
+
+			</md-content>
+		</div>
 
 
-					<div layout="row">
-						<md-button type="submit">Login</md-button>
-					</div>
-
-
-				</form>
-			</div>
-
-		</md-content>
 	
 	</div>
 

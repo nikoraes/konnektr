@@ -10,8 +10,8 @@ angular.module('konnektr.main', [])
 
 	/** Authentication and session **/
 
-	.service('auth', [ 'session', 'couch',
-		function (session, couch) {
+	.service('auth', [ '$http', 'session', 'couch',
+		function ($http, session, couch) {
 			this.isLoggedIn = function () {
 				return session.getUserName() !== null;
 			};
@@ -26,7 +26,11 @@ angular.module('konnektr.main', [])
 					.then(function (response) {
 						session.destroy();
 					});
-    	};    	
+    	};  
+    	this.register = function (credentials) {
+	      return $http
+	        .post('/api/register', credentials);    		
+    	};
 		}])
 
 	.service('session', function () {				
@@ -50,19 +54,21 @@ angular.module('konnektr.main', [])
 		function ($rootScope, auth, session) {
 	    $rootScope.auth = auth;
 	    $rootScope.session = session;    
+	    session.destroy();
 		}])
 
 
 	/** Router **/	
 	.config(['$urlRouterProvider',
 		function($urlRouterProvider) {
-		  $urlRouterProvider.otherwise("/");
+		  $urlRouterProvider.otherwise("/dashboard");
 		}])
 
 	.run(['$rootScope', '$state', 'auth',
 		function ($rootScope, $state, auth) {
-		  $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-		    if (toState.authenticate && !auth.isLoggedIn()){
+			$rootScope.$state = $state;
+		  $rootScope.$on('$stateChangeStart', function (event, next) {
+		    if (next.authenticate && !auth.isLoggedIn()){
 		      event.preventDefault();
 		      $state.go('login');
 		    }    
@@ -112,9 +118,15 @@ angular.module('konnektr.main', [])
 			this.getDB = function () {
 				return this.db;
 			};
+			this.getDBname = function () {
+				return this.dbName;
+			};
 		}])
 
-
+	.run(['$rootScope', 'couch',
+		function ($rootScope, couch) {
+	    $rootScope.couch = couch; 
+		}])
 
 
 
