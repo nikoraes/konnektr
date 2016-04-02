@@ -14,23 +14,26 @@ var cfenv = require('cfenv');
 
 // create a new express server
 var app = express();
-
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
 
 // get the app environment from Cloud Foundry
 var appEnv = cfenv.getAppEnv();
 
+// Body-parser
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-var CloudantUser, adminuser, callback, cloudantUser, newuser, server,
-  slice = [].slice;
+// crypto
+var crypto = require('crypto');
 
-var db;
-var cloudant;
+// Cloudant
+var cradle = require('cradle');
+var dbCredentials;
 
-CloudantUser = require("cloudant-user");
 
-function getVCAPCredentials() {
+function getVCAPcredentials() {
 	
 	if(process.env.VCAP_SERVICES) {
 		var vcapServices = JSON.parse(process.env.VCAP_SERVICES);
@@ -39,45 +42,68 @@ function getVCAPCredentials() {
 		// service credentials directly by using the vcapServices object.
 		for(var vcapService in vcapServices){
 			if(vcapService.match(/cloudant/i)){
-				server.host = vcapServices[vcapService][0].credentials.host;
-				server.port = vcapServices[vcapService][0].credentials.port;
-				adminuser.name = vcapServices[vcapService][0].credentials.username;
-				adminuser.pass = vcapServices[vcapService][0].credentials.password;
-				
+				dbCredentials.host = vcapServices[vcapService][0].credentials.host;
+				dbCredentials.port = vcapServices[vcapService][0].credentials.port;
+				dbCredentials.user = vcapServices[vcapService][0].credentials.username;
+				dbCredentials.password = vcapServices[vcapService][0].credentials.password;
+				dbCredentials.url = vcapServices[vcapService][0].credentials.url;
+					
 				break;
 			}
 		}
-		if(server==null){
-			console.warn('Could not find Cloudant credentials in VCAP_SERVICES environment variable - data will be unavailable to the UI');
-		}
 	} else{
 		console.warn('VCAP_SERVICES environment variable not set - data will be unavailable to the UI');
-		// For running this app locally you can get your Cloudant credentials 
-		// from Bluemix (VCAP_SERVICES in "cf env" output or the Environment 
-		// Variables section for an app in the Bluemix console dashboard).
-		// Alternately you could point to a local database here instead of a 
-		// Bluemix service.
-		//dbCredentials.host = "REPLACE ME";
-		//dbCredentials.port = REPLACE ME;
-		//dbCredentials.user = "REPLACE ME";
-		//dbCredentials.password = "REPLACE ME";
-		//dbCredentials.url = "REPLACE ME";
 	}
+};
+
+getVCAPcredentials();
+
+cradle.setup({
+  host: dbCredentials.host,
+  port: dbCredentials.port,
+  cache: false,
+  timeout: 5000
+});
+
+var conn = new (cradle.Connection)({
+  secure: true,
+  auth: { username: dbCredentials.user, password: dbCredentials.password }
+});
+
+var userdb = conn.database('_users');
+
+function createUser(username, password, callback){
+  userdb.get(username, function (err, doc) {
+    if(err && err.error === 'not_found'){
+      var hashAndSalt = generatePasswordHash(password);
+      userdb.save("org.couchdb.user:" + username, {
+        name: username,
+        password_sha: hashAndSalt[0],
+        salt: hashAndSalt[1],
+        password_scheme: 'simple',
+        type: 'user'
+      }, callback);
+    } else if(err) {
+      callback(err);
+    } else {
+      callback({error: 'user_exists'});
+    }
+  });
+}
+
+function generatePasswordHash(password){
+  var salt = crypto.randomBytes(16).toString('hex');
+  var hash = crypto.createHash('sha1');
+  hash.update(password + salt);
+  return [hash.digest('hex'), salt];
 }
 
 
-callback = function(err, res) {
-  if (err) {
-  	res.send('error');
-    console.log(err);
-  }
-  if (res) {
-  	res.status(200).send('OK');
-    return console.log(res);
-  }
-};
 
-getVCAPCredentials();
+
+
+
+
 
 
 
@@ -86,27 +112,13 @@ getVCAPCredentials();
 
 
 app.post('/api/register', function(req, res) {
-	
-	newuser.name  = req.body.username;
-	newuser.pass = req.body.password;
-	newuser.roles = ["_reader", "_writer"];
-
-	cloudantUser = new CloudantUser(server, adminuser);
-	cloudantUser.create.apply(cloudantUser, [newuser.name, newuser.pass].concat(slice.call(newuser.roles), [callback]));
-	
-	res.status(200).send('OK');
-
+		console.log(req);
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    createUser(username, password);
+    
 });
-
-app.post('/api/createdb', function(req, res) {
-	
-	db  = req.body.dbname;
-
-});
-
-
-
-
 
 
 

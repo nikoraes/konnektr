@@ -7,15 +7,9 @@
 	},
 	"dependencies": {
 		"express": "4.13.x",
-		"ejs": "2.4.x",
 		"cfenv": "1.0.x",
-		"cloudant": "1.4.x",
-		"cloudant-user": "0.2.0",
-    "body-parser": "1.14.x",
-		"method-override": "2.3.x",
-    "morgan": "1.6.x",
-    "errorhandler": "1.4.x",
-    "connect-multiparty": "2.0.x"
+		"cradle": "0.7.1",
+    "body-parser": "1.14.x"
 	},
 	"repository": {},
 	"engines": {

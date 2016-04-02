@@ -29,7 +29,10 @@ angular.module('konnektr.main', [])
     	};  
     	this.register = function (credentials) {
 	      return $http
-	        .post('/api/register', credentials);    		
+	        .post('/api/register', credentials)
+	        .then(function(response) {
+	        	this.logIn();
+	        });    		
     	};
 		}])
 
