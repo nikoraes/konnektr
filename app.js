@@ -33,6 +33,7 @@ var cradle = require('cradle');
 var dbCredentials;
 
 
+/**
 function getVCAPcredentials() {
 	
 	if(process.env.VCAP_SERVICES) {
@@ -57,17 +58,21 @@ function getVCAPcredentials() {
 };
 
 getVCAPcredentials();
+**/
 
 cradle.setup({
-  host: dbCredentials.host,
-  port: dbCredentials.port,
+  host: '7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com',
+  port: 443,
   cache: false,
   timeout: 5000
 });
 
 var conn = new (cradle.Connection)({
   secure: true,
-  auth: { username: dbCredentials.user, password: dbCredentials.password }
+  auth: {
+  	username: '7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix', 
+  	password: 'c9b6d1ba44f61a5b0e26f622aef1c025b7af555cb88e9c4be4f66e07f6471365' 
+  	}
 });
 
 var userdb = conn.database('_users');
@@ -97,15 +102,6 @@ function generatePasswordHash(password){
   hash.update(password + salt);
   return [hash.digest('hex'), salt];
 }
-
-
-
-
-
-
-
-
-
 
 
 
