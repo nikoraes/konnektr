@@ -78,10 +78,12 @@ var conn = new (cradle.Connection)({
 var userdb = conn.database('_users');
 
 function createUser(username, password, callback){
-  userdb.get(username, function (err, doc) {
+  var userdocid = "org.couchdb.user:"+ username
+  userdb.get(userdocid, function (err, doc) {
     if(err && err.error === 'not_found'){
       var hashAndSalt = generatePasswordHash(password);
-      userdb.save("org.couchdb.user:" + username, {
+      console.log(hashAndSalt);
+      userdb.save(userdocid, {
         name: username,
         password_sha: hashAndSalt[0],
         salt: hashAndSalt[1],
@@ -108,7 +110,8 @@ function generatePasswordHash(password){
 
 
 app.post('/api/register', function(req, res) {
-		console.log(req);
+		console.log(req.body.username);
+		console.log(req.body.password);
     var username = req.body.username;
     var password = req.body.password;
     
