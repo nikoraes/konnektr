@@ -29,8 +29,7 @@ app.use(bodyParser.json());
 var crypto = require('crypto');
 
 // Cloudant
-var cradle = require('cradle');
-var dbCredentials;
+var Cloudant = require('cloudant');
 
 
 /**
@@ -60,6 +59,7 @@ function getVCAPcredentials() {
 getVCAPcredentials();
 **/
 
+/**
 cradle.setup({
   host: '7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com',
   port: 443,
@@ -76,24 +76,40 @@ var conn = new (cradle.Connection)({
 });
 
 var userdb = conn.database('_users');
+**/
+
+
+
+
+var cloudant = Cloudant("https://7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix:c9b6d1ba44f61a5b0e26f622aef1c025b7af555cb88e9c4be4f66e07f6471365@7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com");
+var userdb = cloudant.db.use('_users');
+
+
+
+
+
 
 function createUser(username, password, callback){
   var userdocid = "org.couchdb.user:"+ username
-  userdb.get(userdocid, function (err, doc) {
+  userdb.get(userdocid, function (err, data) {
     if(err && err.error === 'not_found'){
       var hashAndSalt = generatePasswordHash(password);
       console.log(hashAndSalt);
-      userdb.save(userdocid, {
-        name: username,
-        password_sha: hashAndSalt[0],
+      userdb.insert({
+      	_id: userdocid,
+        name: username,      	
+      	password_sha: hashAndSalt[0],
         salt: hashAndSalt[1],
-        password_scheme: 'simple',
+				roles: [],
         type: 'user'
-      }, callback);
+      }, function(err, body) {
+			  if (!err)
+			    console.log(body)
+			})      
     } else if(err) {
-      callback(err);
+      console.log(err);
     } else {
-      callback({error: 'user_exists'});
+      console.log({error: 'user_exists'});
     }
   });
 }

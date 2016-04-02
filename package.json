@@ -8,7 +8,7 @@
 	"dependencies": {
 		"express": "4.13.x",
 		"cfenv": "1.0.x",
-		"cradle": "0.7.1",
+		"cloudant": "1.4.x",
     "body-parser": "1.14.x"
 	},
 	"repository": {},
