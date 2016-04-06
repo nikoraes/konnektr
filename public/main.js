@@ -19,13 +19,12 @@ angular.module('konnektr.main', [])
 				couch.server.login(credentials.username, credentials.password)
 					.then(function (response) {
 						session.create(couch.server.userCtx);
+						return response;
 					});		
 			};
 			this.logOut = function () {
-				couch.server.logout()
-					.then(function (response) {
-						session.destroy();
-					});
+				session.destroy();
+				couch.server.logout();
     	};  
     	this.register = function (credentials) {
 	      return $http
@@ -55,9 +54,10 @@ angular.module('konnektr.main', [])
 
 	.run(['$rootScope', 'auth', 'session',
 		function ($rootScope, auth, session) {
+	    auth.logOut();
 	    $rootScope.auth = auth;
 	    $rootScope.session = session;    
-	    session.destroy();
+	    
 		}])
 
 
@@ -114,9 +114,11 @@ angular.module('konnektr.main', [])
 	.service('couch', [ 'cornercouch', 'COUCHDB', 
 		function (cornercouch, COUCHDB) {		
 			this.server = cornercouch(COUCHDB.url, COUCHDB.method);
+			
 			this.setDB = function (dbName) {
 				this.dbName = dbName; 
 				this.db = this.server.getDB(dbName);
+				return this.db;
 			};
 			this.getDB = function () {
 				return this.db;

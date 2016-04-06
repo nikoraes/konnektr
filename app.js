@@ -59,37 +59,13 @@ function getVCAPcredentials() {
 getVCAPcredentials();
 **/
 
-/**
-cradle.setup({
-  host: '7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com',
-  port: 443,
-  cache: false,
-  timeout: 5000
-});
-
-var conn = new (cradle.Connection)({
-  secure: true,
-  auth: {
-  	username: '7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix', 
-  	password: 'c9b6d1ba44f61a5b0e26f622aef1c025b7af555cb88e9c4be4f66e07f6471365' 
-  	}
-});
-
-var userdb = conn.database('_users');
-**/
-
 
 
 
 var cloudant = Cloudant("https://7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix:c9b6d1ba44f61a5b0e26f622aef1c025b7af555cb88e9c4be4f66e07f6471365@7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com");
 var userdb = cloudant.db.use('_users');
 
-
-
-
-
-
-function createUser(username, password, callback){
+function createUser(username, password){
   var userdocid = "org.couchdb.user:"+ username
   userdb.get(userdocid, function (err, data) {
     if(err && err.error === 'not_found'){
@@ -121,20 +97,74 @@ function generatePasswordHash(password){
   return [hash.digest('hex'), salt];
 }
 
-
-
-
-
 app.post('/api/register', function(req, res) {
-		console.log(req.body.username);
-		console.log(req.body.password);
-    var username = req.body.username;
-    var password = req.body.password;
-    
-    createUser(username, password);
-    
+	console.log(req.body.username);
+	console.log(req.body.password);
+  var username = req.body.username;
+  var password = req.body.password;   
+  var userdocid = "org.couchdb.user:"+ username;
+  userdb.get(userdocid, function (err, data) {
+    if(err && err.error === 'not_found'){
+      var hashAndSalt = generatePasswordHash(password);
+      console.log(hashAndSalt);
+      userdb.insert({
+      	_id: userdocid,
+        name: username,      	
+      	password_sha: hashAndSalt[0],
+        salt: hashAndSalt[1],
+				roles: [],
+        type: 'user'
+      }, function(err, body) {
+			  if (!err)
+			    console.log(body);
+			    res.status(200).send(body);
+			});  
+    } else if(err) {
+      console.log(err);
+      res.send(err);
+    } else {
+      console.log({error: 'user_exists'});
+      res.send({error: 'user_exists'});
+    }
+  });   
 });
 
+app.post('/api/createdb', function(req, res) {
+  var username = req.body.username;
+  var newdbname = req.body.dbname;
+  var userdocid = "org.couchdb.user:"+ username;
+  var userdoc = userdb.get(userdocid, function (err, data) {
+  	if (!err) {
+  		cloudant.db.get(newdbname, function(err, body) {
+  			if(err && err.error === 'not_found'){
+  				cloudant.db.create(newdbname, function (err, body) {
+				    console.log(body);
+				    res.status(200).send(body);
+				    var newuserdoc = userdoc;
+				    newuserdoc.database = newdbname;
+						userdb.insert(newuserdoc, function(err, body) {
+					  if (!err)
+					    console.log(body);
+					    res.status(200).send(body);
+				    });				    
+  				}) 				
+			  } else if (err) {
+			    console.log(err);
+			    res.send(err);
+			  } else {
+		      console.log({error: 'db_exists'});
+		      res.send({error: 'db_exists'});			  	
+			  }
+			});
+  	} else if (err && err.error === 'not_found') {
+  		console.log({error: 'user not found'});
+  		res.send({error: 'user not found'});
+  	} else if (err) {
+      console.log(err);
+      res.send(err);   	
+    };
+  });
+});
 
 
 

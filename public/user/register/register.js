@@ -13,8 +13,8 @@ angular.module('konnektr.user.register', [])
 		    });
 		}])
 
-	.controller('RegisterCtrl', ['$scope', '$state', 'auth', 'couch',
-		function ($scope, $state, auth, couch) {
+	.controller('RegisterCtrl', ['$scope', '$state', '$http', 'auth', 'couch',
+		function ($scope, $state, $http, auth, couch) {
 			$scope.credentials = {
 				username: '',
 				password: ''
@@ -27,13 +27,20 @@ angular.module('konnektr.user.register', [])
 					});		
 				
 				/**$state.go('dashboard');**/
+			};	
+			
+			$scope.createdb = function () {
+				$scope.createdbparams = {
+					username: $scope.credentials.username,
+					dbname: $scope.dbname
+				};
+	      return $http
+	        .post('/api/createdb', $scope.createdbparams);  				
 			};
-
+			
 			
 		}]) 
-
 ;	
 
-;	
 	
 	

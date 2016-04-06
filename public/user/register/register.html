@@ -24,20 +24,17 @@
 						</md-input-container>
 	
 						<div layout="row">
-
 							<md-button class="md-raised md-primary" ng-click="register()">Register</md-button>
 							<md-button class="md-primary" ng-click="$state.go('login')">Login</md-button>
 						</div>
 
-						<div>{{ response }}</div>
-	
 						<md-input-container class="md-block" flex-gt-sm>
-							<label>Database</label>
+							<label>New database name</label>
 							<input ng-model="dbname" required>
 						</md-input-container>
 
 						<div layout="row">
-							<md-button class="md-raised md-primary" ng-click="setdb()">Go</md-button>
+							<md-button class="md-raised md-primary" ng-click="createdb()">Create DB</md-button>
 						</div>
 						
 					</form>
