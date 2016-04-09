@@ -32,63 +32,13 @@ var crypto = require('crypto');
 var Cloudant = require('cloudant');
 
 
-/**
-function getVCAPcredentials() {
-	
-	if(process.env.VCAP_SERVICES) {
-		var vcapServices = JSON.parse(process.env.VCAP_SERVICES);
-		// Pattern match to find the first instance of a Cloudant service in
-		// VCAP_SERVICES. If you know your service key, you can access the
-		// service credentials directly by using the vcapServices object.
-		for(var vcapService in vcapServices){
-			if(vcapService.match(/cloudant/i)){
-				dbCredentials.host = vcapServices[vcapService][0].credentials.host;
-				dbCredentials.port = vcapServices[vcapService][0].credentials.port;
-				dbCredentials.user = vcapServices[vcapService][0].credentials.username;
-				dbCredentials.password = vcapServices[vcapService][0].credentials.password;
-				dbCredentials.url = vcapServices[vcapService][0].credentials.url;
-					
-				break;
-			}
-		}
-	} else{
-		console.warn('VCAP_SERVICES environment variable not set - data will be unavailable to the UI');
-	}
-};
 
-getVCAPcredentials();
-**/
+var cloudanturl = "https://7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix:c9b6d1ba44f61a5b0e26f622aef1c025b7af555cb88e9c4be4f66e07f6471365@7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com";
 
-
-
-
-var cloudant = Cloudant("https://7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix:c9b6d1ba44f61a5b0e26f622aef1c025b7af555cb88e9c4be4f66e07f6471365@7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com");
+var cloudant = Cloudant(cloudanturl);
 var userdb = cloudant.db.use('_users');
+var replicatordb = cloudant.db.use('_replicator');
 
-function createUser(username, password){
-  var userdocid = "org.couchdb.user:"+ username
-  userdb.get(userdocid, function (err, data) {
-    if(err && err.error === 'not_found'){
-      var hashAndSalt = generatePasswordHash(password);
-      console.log(hashAndSalt);
-      userdb.insert({
-      	_id: userdocid,
-        name: username,      	
-      	password_sha: hashAndSalt[0],
-        salt: hashAndSalt[1],
-				roles: [],
-        type: 'user'
-      }, function(err, body) {
-			  if (!err)
-			    console.log(body)
-			})      
-    } else if(err) {
-      console.log(err);
-    } else {
-      console.log({error: 'user_exists'});
-    }
-  });
-}
 
 function generatePasswordHash(password){
   var salt = crypto.randomBytes(16).toString('hex');
@@ -97,74 +47,48 @@ function generatePasswordHash(password){
   return [hash.digest('hex'), salt];
 }
 
+
+
+
 app.post('/api/register', function(req, res) {
-	console.log(req.body.username);
-	console.log(req.body.password);
-  var username = req.body.username;
-  var password = req.body.password;   
+	var username = req.body.username;
+  var password = req.body.password;	
   var userdocid = "org.couchdb.user:"+ username;
-  userdb.get(userdocid, function (err, data) {
-    if(err && err.error === 'not_found'){
-      var hashAndSalt = generatePasswordHash(password);
-      console.log(hashAndSalt);
-      userdb.insert({
+  var hashAndSalt = generatePasswordHash(password);
+  userdb
+  	.insert({
       	_id: userdocid,
         name: username,      	
       	password_sha: hashAndSalt[0],
         salt: hashAndSalt[1],
 				roles: [],
         type: 'user'
-      }, function(err, body) {
-			  if (!err)
-			    console.log(body);
-			    res.status(200).send(body);
-			});  
-    } else if(err) {
-      console.log(err);
-      res.send(err);
-    } else {
-      console.log({error: 'user_exists'});
-      res.send({error: 'user_exists'});
-    }
-  });   
+      })
+		.pipe(res);
 });
 
+
 app.post('/api/createdb', function(req, res) {
-  var username = req.body.username;
-  var newdbname = req.body.dbname;
-  var userdocid = "org.couchdb.user:"+ username;
-  var userdoc = userdb.get(userdocid, function (err, data) {
-  	if (!err) {
-  		cloudant.db.get(newdbname, function(err, body) {
-  			if(err && err.error === 'not_found'){
-  				cloudant.db.create(newdbname, function (err, body) {
-				    console.log(body);
-				    res.status(200).send(body);
-				    var newuserdoc = userdoc;
-				    newuserdoc.database = newdbname;
-						userdb.insert(newuserdoc, function(err, body) {
-					  if (!err)
-					    console.log(body);
-					    res.status(200).send(body);
-				    });				    
-  				}) 				
-			  } else if (err) {
-			    console.log(err);
-			    res.send(err);
-			  } else {
-		      console.log({error: 'db_exists'});
-		      res.send({error: 'db_exists'});			  	
-			  }
-			});
-  	} else if (err && err.error === 'not_found') {
-  		console.log({error: 'user not found'});
-  		res.send({error: 'user not found'});
-  	} else if (err) {
-      console.log(err);
-      res.send(err);   	
-    };
-  });
+	var newdbname = req.body.dbname;
+	cloudant.db
+		.create(newdbname)
+		.pipe(res);
 });
+
+
+app.post('/api/setupdb', function(req, res) {
+	var dbname = req.body.dbname;
+	var repsource = cloudanturl + '/setup';
+	var reptarget = cloudanturl + '/' + dbname;
+	replicatordb
+  	.insert({
+      	_id: dbname,    	
+				source: repsource,
+				target: reptarget
+      })
+		.pipe(res);
+});
+
 
 
 

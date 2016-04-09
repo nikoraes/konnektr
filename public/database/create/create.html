@@ -1,0 +1,25 @@
+<md-content layout-padding>
+
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>New database name</label>
+		<input ng-model="createdbdata.dbname" required>
+	</md-input-container>
+
+  <md-checkbox ng-model="setasdefaultdb">
+    Set as default
+  </md-checkbox>
+
+	<div layout="row">
+		<md-button class="md-raised md-primary" ng-click="createdb()">Create DB</md-button>
+	</div>
+	
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Database</label>
+		<input ng-model="dbname" required>
+	</md-input-container>
+
+	<div layout="row">
+		<md-button class="md-raised md-primary" ng-click="setdb()">Go</md-button>
+	</div>
+
+</md-padding>

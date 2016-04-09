@@ -24,20 +24,11 @@ angular.module('konnektr.user.register', [])
 				auth.register($scope.credentials)
 					.then(function(response) {
 						$scope.response = response;
+						$state.go('login');
 					});		
 				
-				/**$state.go('dashboard');**/
 			};	
-			
-			$scope.createdb = function () {
-				$scope.createdbparams = {
-					username: $scope.credentials.username,
-					dbname: $scope.dbname
-				};
-	      return $http
-	        .post('/api/createdb', $scope.createdbparams);  				
-			};
-			
+		
 			
 		}]) 
 ;	

@@ -28,10 +28,7 @@ angular.module('konnektr.main', [])
     	};  
     	this.register = function (credentials) {
 	      return $http
-	        .post('/api/register', credentials)
-	        .then(function(response) {
-	        	this.logIn();
-	        });    		
+	        .post('/api/register', credentials);    		
     	};
 		}])
 
@@ -56,8 +53,7 @@ angular.module('konnektr.main', [])
 		function ($rootScope, auth, session) {
 	    auth.logOut();
 	    $rootScope.auth = auth;
-	    $rootScope.session = session;    
-	    
+	    $rootScope.session = session;    	    
 		}])
 
 
@@ -120,12 +116,19 @@ angular.module('konnektr.main', [])
 				this.db = this.server.getDB(dbName);
 				return this.db;
 			};
+			
 			this.getDB = function () {
 				return this.db;
 			};
+			
 			this.getDBname = function () {
 				return this.dbName;
 			};
+
+			this.getUserDoc = function () {
+				return this.server.getUserDoc;
+			};
+			
 		}])
 
 	.run(['$rootScope', 'couch',

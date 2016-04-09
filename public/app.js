@@ -8,6 +8,7 @@ angular.module('konnektr', [
 	'konnektr.user.login',
 	'konnektr.user.profile',
 	'konnektr.user.register',
+	'konnektr.database.create',	
 	'konnektr.home',
 	'konnektr.dashboard',
 	'konnektr.explore',

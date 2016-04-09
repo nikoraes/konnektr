@@ -23,7 +23,7 @@ angular.module('konnektr.user.login', [])
 			$scope.login = function() {
 				auth.logIn($scope.credentials);		
 				/**$state.go('dashboard');**/
-				$scope.dbname = couch.server.getUserDoc().database;
+				$scope.dbname = couch.server.getUserDoc().defaultdatabase;
 			};
 			
 			$scope.dbname = "";
