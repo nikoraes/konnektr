@@ -33,7 +33,7 @@ var Cloudant = require('cloudant');
 
 
 
-var cloudanturl = "https://7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix:c9b6d1ba44f61a5b0e26f622aef1c025b7af555cb88e9c4be4f66e07f6471365@7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com";
+var cloudanturl = "https://9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix:9ebeec7f0e6c66d40994b2ee85ea5ad724cac2558686cc6c4c161e33d6a7cad9@9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix.cloudant.com";
 
 var cloudant = Cloudant(cloudanturl);
 var userdb = cloudant.db.use('_users');
@@ -84,7 +84,8 @@ app.post('/api/setupdb', function(req, res) {
   	.insert({
       	_id: dbname,    	
 				source: repsource,
-				target: reptarget
+				target: reptarget,
+				create_target: true
       })
 		.pipe(res);
 });

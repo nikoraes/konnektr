@@ -15,29 +15,31 @@
 	
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Email</label>
-							<input type="text" ng-model="credentials.username" required>
+							<input required type="email" ng-model="credentials.username" minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/">
+							<div ng-messages="projectForm.clientEmail.$error" role="alert">
+			          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+			            Your email must be between 10 and 100 characters long and look like an e-mail address.
+			          </div>
+			        </div>
 						</md-input-container>
 	
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Password</label>
-							<input type="password" ng-model="credentials.password" required>
+							<input required type="password" ng-model="credentials.password">
 						</md-input-container>
 	
 						<div layout="row">
 							<md-button class="md-raised md-primary" ng-click="register()">Register</md-button>
 							<md-button class="md-primary" ng-click="$state.go('login')">Login</md-button>
 						</div>
-
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>New database name</label>
-							<input ng-model="dbname" required>
-						</md-input-container>
-
-						<div layout="row">
-							<md-button class="md-raised md-primary" ng-click="createdb()">Create DB</md-button>
-						</div>
+						
+						
 						
 					</form>
+					
+					<p>
+						{{response}}
+					</p>
 
 			</md-content>
 		</div>

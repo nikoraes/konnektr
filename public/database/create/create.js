@@ -3,9 +3,9 @@ angular.module('konnektr.database.create', [])
 	.config(['$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {
 		  $stateProvider
-		    .state('database.create', {
-		      url: "/database/create",
-		      templateUrl: "databse/create/create.html",
+		    .state('createdb', {
+		      url: "/createdb",
+		      templateUrl: "database/create/create.html",
 		      controller: 'CreateDBCtrl',
 		      authenticate: true,
 		      resolve: {
@@ -22,16 +22,11 @@ angular.module('konnektr.database.create', [])
 
 			$scope.setasdefaultdb = false;
 
-    	$scope.createdb = function() {    		
+    	$scope.setupdb = function() {    		
 	      return $http
-	        .post('/api/createdb', $scope.createdbdata)
+	        .post('/api/setupdb', $scope.createdbdata)
 	        .then(function (response) {
-	        	console.log(response);
-			      return $http
-			        .post('/api/setupdb', $scope.createdbdata)
-			        .then(function (response) {
-			        	console.log(response);
-		        	});	        	
+	        	console.log(response);        	
 	        	});
     	};
 

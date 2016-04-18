@@ -1,14 +1,14 @@
-angular.module('konnektr.visualize', [])
+angular.module('konnektr.trends', [])
 		
 	.config(['$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {
 			$stateProvider
-		    .state('visualize', {
-		      url: "/visualize",
-		      templateUrl: "visualize/visualize.html",
+		    .state('trends', {
+		      url: "/trends",
+		      templateUrl: "trends/trends.html",
 			   	authenticate: true,
 		      resolve: {
-		      	$title: function() { return 'Visualize'; }
+		      	$title: function() { return 'Trends'; }
 		      }
 		    });
 		}])

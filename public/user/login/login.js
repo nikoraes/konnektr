@@ -21,16 +21,15 @@ angular.module('konnektr.user.login', [])
 			};
 
 			$scope.login = function() {
-				auth.logIn($scope.credentials);		
-				/**$state.go('dashboard');**/
-				$scope.dbname = couch.server.getUserDoc().defaultdatabase;
+				auth.logIn($scope.credentials)
+					.then(function(response) {
+							$scope.response = response;
+							$state.go('createdb');
+						}, function(response) {
+							$scope.error = response;
+						});;				
 			};
-			
-			$scope.dbname = "";
-			
-			$scope.setdb = function() {
-				couch.setDB($scope.dbname);
-			};
+
 			
 		}]) 
 

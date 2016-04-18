@@ -19,12 +19,16 @@ angular.module('konnektr.user.register', [])
 				username: '',
 				password: ''
 			};
+			
+			$scope.error = "";
 
 			$scope.register = function() {
 				auth.register($scope.credentials)
 					.then(function(response) {
 						$scope.response = response;
 						$state.go('login');
+					}, function(response) {
+						$scope.error = response;
 					});		
 				
 			};	

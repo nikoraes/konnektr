@@ -16,10 +16,9 @@ angular.module('konnektr.main', [])
 				return session.getUserName() !== null;
 			};
 			this.logIn = function (credentials) {
-				couch.server.login(credentials.username, credentials.password)
+				return couch.server.login(credentials.username, credentials.password)
 					.then(function (response) {
 						session.create(couch.server.userCtx);
-						return response;
 					});		
 			};
 			this.logOut = function () {
@@ -103,7 +102,7 @@ angular.module('konnektr.main', [])
 
 	/** Database **/
 	.constant('COUCHDB', {
-	  url: 'https://7e0ec13a-1e6e-4efe-83ed-709d223d5e37-bluemix.cloudant.com',
+	  url: '9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix.cloudant.com',
 	  method: 'GET'
 	})
 

@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material-data-table/0.10.5/md-data-table.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Lato" >
+  <link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Lato">
   
   <style>
 	  body{
@@ -36,6 +37,11 @@
       ng-show="auth.isLoggedIn()">
 
     <md-toolbar class="md-tall md-accent md-hue-3">
+    	<div class="md-toolbar-tools">
+    	  <h2 class="md-title">
+	        <span>KONNEKTR</span>
+	      </h2>
+	    </div>
     	<span flex></span>
       <div layout="column" class="md-toolbar-tools-bottom inset">
       	<span></span>
@@ -49,9 +55,21 @@
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
       </md-list-item>
+      <md-list-item>
+        <md-icon>cloud_circle</md-icon>
+        <p>Open Data</p>
+      </md-list-item>
+      <md-list-item>
+        <md-icon>device_hub</md-icon>
+        <p>Data Sources</p>
+      </md-list-item>
       <md-list-item ng-click="$state.go('explore')">
-        <md-icon>explore</md-icon>
-        <p>Explore</p>
+        <md-icon>developer_board</md-icon>
+        <p>Assets</p>
+      </md-list-item>
+      <md-list-item>
+        <md-icon>blur_on</md-icon>
+        <p>Data Points</p>
       </md-list-item>
       <md-list-item>
         <md-icon>map</md-icon>
@@ -62,7 +80,7 @@
         <p>Trends</p>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item>
+      <md-list-item ng-click="$state.go('createdb')">
         <md-icon>storage</md-icon>
         <p>Database</p>
       </md-list-item>
@@ -106,6 +124,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>  
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>	
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-data-table/0.10.5/md-data-table.min.js"></script>	
   
 	<script src="app.js"></script>
 	<script src="main.js"></script>
@@ -115,10 +134,9 @@
 	<script src="user/profile/profile.js"></script>
 	<script src="user/register/register.js"></script>
 	<script src="database/create/create.js"></script>
-	<script src="home/home.js"></script>
 	<script src="dashboard/dashboard.js"></script>
 	<script src="explore/explore.js"></script>
-	<script src="visualize/visualize.js"></script>  
+	<script src="trends/trends.js"></script>  
 
 </body>
 </html>
