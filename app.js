@@ -31,9 +31,12 @@ var crypto = require('crypto');
 // Cloudant
 var Cloudant = require('cloudant');
 
+var cloudantService = appEnv.getService("konnektr-cloudant");
 
+var cloudanturl = cloudantService.credentials.url;
+var cloudantuser = cloudantService.credentials.username;
 
-var cloudanturl = "https://9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix:9ebeec7f0e6c66d40994b2ee85ea5ad724cac2558686cc6c4c161e33d6a7cad9@9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix.cloudant.com";
+// var cloudanturl = "https://9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix:9ebeec7f0e6c66d40994b2ee85ea5ad724cac2558686cc6c4c161e33d6a7cad9@9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix.cloudant.com";
 
 var cloudant = Cloudant(cloudanturl);
 var userdb = cloudant.db.use('_users');
@@ -62,7 +65,9 @@ app.post('/api/register', function(req, res) {
       	password_sha: hashAndSalt[0],
         salt: hashAndSalt[1],
 				roles: [],
-        type: 'user'
+        type: 'user',
+        defaultdatabase: '',
+        databases: []
       })
 		.pipe(res);
 });
@@ -78,15 +83,67 @@ app.post('/api/createdb', function(req, res) {
 
 app.post('/api/setupdb', function(req, res) {
 	var dbname = req.body.dbname;
+	var username = req.body.username;
+	var userdocid = "org.couchdb.user:"+ username;
+	var defaultdb = req.body.defaultdb;
 	var repsource = cloudanturl + '/setup';
 	var reptarget = cloudanturl + '/' + dbname;
-	replicatordb
-  	.insert({
-      	_id: dbname,    	
-				source: repsource,
-				target: reptarget,
-				create_target: true
-      })
+
+	// create DB	
+	cloudant.db
+		.create(dbname, 
+			function (err, body) {
+				if (!err) {
+					// configure replication
+					replicatordb
+				  	.insert({
+				      	_id: dbname,    	
+								source: repsource,
+								target: reptarget
+				      }, 
+				      function (err, body) {
+				      	if (!err) {
+				      		// add user to DB's security document
+				      		console.log(body);
+									var newdb = cloudant.db.use(dbname);										
+								  newdb
+								  	.insert(	{
+											  couchdb_auth_only: true,
+											  admins: {
+											    names: [cloudantuser],
+											    roles: ["_admin"]
+											  },
+											  members: {
+											    names: [username],
+											    roles:[]
+											  }
+											}, 
+											function (err, body) {
+												if (!err) {
+													// add database to user's database list
+													console.log(body);
+													userdb
+														.get(userdocid, { revs_info: true }, 
+															function (err, userdoc) {
+															  if (!err) {
+															  	console.log(body);
+															  	var newuserdoc = userdoc;
+															  	newuserdoc.databases.push(dbname);
+															  	if (defaultdb) newuserdoc.defaultdatabase = dbname;
+															  	userdb
+															  		.insert(newuserdoc)
+															  		.pipe(res);															  	
+															  }
+															})
+															.pipe(res);
+												}
+											})
+										.pipe(res);		
+									}
+							})
+						.pipe(res);			    
+			  }
+			})
 		.pipe(res);
 });
 

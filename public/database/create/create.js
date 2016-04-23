@@ -14,10 +14,12 @@ angular.module('konnektr.database.create', [])
 		    });
 		}])
 
-	.controller('CreateDBCtrl', ['$scope', '$state', '$http', 'couch',
-		function ($scope, $state, $http, couch) {
+	.controller('CreateDBCtrl', ['$scope', '$state', '$http', 'couch', 'session',
+		function ($scope, $state, $http, couch, session) {
+			
 			$scope.createdbdata = {
-				dbname: ''
+				dbname: '',
+				username: session.getUserName
 			};		
 
 			$scope.setasdefaultdb = false;

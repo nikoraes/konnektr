@@ -10,8 +10,8 @@ angular.module('konnektr.main', [])
 
 	/** Authentication and session **/
 
-	.service('auth', [ '$http', 'session', 'couch',
-		function ($http, session, couch) {
+	.service('auth', [ '$http', '$state', 'session', 'couch',
+		function ($http, $state, session, couch) {
 			this.isLoggedIn = function () {
 				return session.getUserName() !== null;
 			};
@@ -24,6 +24,8 @@ angular.module('konnektr.main', [])
 			this.logOut = function () {
 				session.destroy();
 				couch.server.logout();
+				couch.setDB(null);
+				$state.go('login');
     	};  
     	this.register = function (credentials) {
 	      return $http
@@ -102,7 +104,7 @@ angular.module('konnektr.main', [])
 
 	/** Database **/
 	.constant('COUCHDB', {
-	  url: '9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix.cloudant.com',
+	  url: 'https://9e901ac1-1c1c-4046-9c38-d4fbed11844c-bluemix.cloudant.com',
 	  method: 'GET'
 	})
 
@@ -112,7 +114,9 @@ angular.module('konnektr.main', [])
 			
 			this.setDB = function (dbName) {
 				this.dbName = dbName; 
-				this.db = this.server.getDB(dbName);
+				if (dbName) {
+					this.db = this.server.getDB(dbName);
+				};
 				return this.db;
 			};
 			
