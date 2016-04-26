@@ -10,10 +10,10 @@
   <link rel="stylesheet" type='text/css' href="https://fonts.googleapis.com/css?family=Lato">
   
   <style>
-	  body{
+	  body {
 		  font-family: "Lato";
 		}
-	  md-toolbar .md-title {
+	  .konnektr-title {
 		  margin: auto;
 		  font-weight: 700;
 			letter-spacing: 4px;
@@ -36,17 +36,17 @@
       ng-cloak
       ng-show="auth.isLoggedIn()">
 
-    <md-toolbar class="md-tall md-accent md-hue-3">
-    	<div class="md-toolbar-tools">
+    <md-toolbar class="md-tall md-accent">
+    	<div class="md-toolbar-tools" layout-align="center start">
     	  <h2 class="md-title">
-	        <span>KONNEKTR</span>
+	        <span class="konnektr-title">KONNEKTR</span>
 	      </h2>
 	    </div>
     	<span flex></span>
       <div layout="column" class="md-toolbar-tools-bottom inset">
       	<span></span>
         <div class="md-body-2" ng-bind="couch.getDBname()"></div>
-        <div class="md-caption" ng-bind="session.getUserName()"></div>
+        <div class="md-caption" ng-bind="couch.server.userDoc.name"></div>
       </div>
     </md-toolbar>
 
@@ -63,7 +63,7 @@
         <md-icon>device_hub</md-icon>
         <p>Data Sources</p>
       </md-list-item>
-      <md-list-item ng-click="$state.go('explore')">
+      <md-list-item ng-click="$state.go('assetlist')">
         <md-icon>developer_board</md-icon>
         <p>Assets</p>
       </md-list-item>
@@ -80,32 +80,57 @@
         <p>Trends</p>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item ng-click="$state.go('createdb')">
+      <md-list-item ng-click="$state.go('databaselist')">
         <md-icon>storage</md-icon>
-        <p>Database</p>
+        <p>Databases</p>
       </md-list-item>
       <md-divider></md-divider>
-      <md-list-item ng-click="auth.logOut()">
-        <p>Logout</p>
-      </md-list-item>
+      <div show-gt-sm>
+	      <md-list-item ng-click="$state.go('profile')">
+	        <p>Profile</p>
+	      </md-list-item>
+	      <md-list-item ng-click="auth.logOut()">
+	        <p>Logout</p>
+	      </md-list-item>
+      </div>
+
+
+      
     </md-list>
 
   </md-sidenav>
 
   <div flex layout="column" role="main">
 
-    <md-toolbar class="md-whiteframe-z4 md-hue-2" layout="row">
+    <md-toolbar class="md-whiteframe-z4" layout="row">
     	<div class="md-toolbar-tools">
 	      <md-button class="md-icon-button" id="main" class="menu" hide-gt-sm ng-show="auth.isLoggedIn()" ng-click="toggleSidenav()">
 	        <md-icon>menu</md-icon>
 	      </md-button>
 	      <h2 class="md-title">
-	        <span>KONNEKTR</span>
+	        <span ng-bind="$title">KONNEKTR</span>
 	      </h2>
 	      <span flex></span>
-				<md-button class="md-icon-button">
-					<md-icon>more_vert</md-icon>
-				</md-button>
+	      
+	      <md-menu md-position-mode="target-right target" hide-gt-sm ng-show="auth.isLoggedIn()">
+					<md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+						<md-icon md-menu-origin>more_vert</md-icon>
+					</md-button>
+				  <md-menu-content width="2" >
+	          <md-menu-item>
+	            <md-button ng-click="$state.go('profile')">
+	           	 <p flex>Profile</p>
+	            </md-button>
+	          </md-menu-item>
+	          <md-menu-item>
+	            <md-button ng-click="auth.logOut()">
+	           	 <p flex>Logout</p>
+	            </md-button>
+	          </md-menu-item>         
+	        </md-menu-content>
+				</md-menu>
+	        
+	        
 			</div>
     </md-toolbar>
 
@@ -128,16 +153,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-data-table/0.10.5/md-data-table.min.js"></script>	
   
 	<script src="app.js"></script>
-	<script src="main.js"></script>
+	
 	<script src="common/ui-router-title.js"></script>
 	<script src="common/cornercouch.js"></script>
-	<script src="user/login/login.js"></script>
-	<script src="user/profile/profile.js"></script>
-	<script src="user/register/register.js"></script>
-	<script src="database/create/create.js"></script>
+	
+	<script src="main.js"></script>
+	
+	<script src="assets/assetlist.js"></script>
+	<script src="assets/editasset.js"></script>
+	
 	<script src="dashboard/dashboard.js"></script>
-	<script src="explore/explore.js"></script>
+	
+	<script src="databases/createdb.js"></script>	
+	<script src="databases/databaselist.js"></script>	
+	
 	<script src="trends/trends.js"></script>  
+	
+	<script src="user/auth.js"></script>
+	<script src="user/session.js"></script>
+	<script src="user/login.js"></script>
+	<script src="user/profile.js"></script>
+	<script src="user/register.js"></script>
 
 </body>
 </html>

@@ -64,7 +64,7 @@ app.post('/api/register', function(req, res) {
         name: username,      	
       	password_sha: hashAndSalt[0],
         salt: hashAndSalt[1],
-				roles: [],
+				roles: ["_reader", "_writer"],
         type: 'user',
         defaultdatabase: '',
         databases: []
@@ -76,76 +76,143 @@ app.post('/api/register', function(req, res) {
 app.post('/api/createdb', function(req, res) {
 	var newdbname = req.body.dbname;
 	cloudant.db
-		.create(newdbname)
-		.pipe(res);
+		.create(newdbname, 
+      function (err, body) {
+      	console.log(body);
+      })	.pipe(res);
 });
+
+app.post('/api/replicatedb', function(req, res) {
+	var dbname = req.body.dbname;
+	var repsource = cloudanturl + '/setup';
+	var reptarget = cloudanturl + '/' + dbname;
+	replicatordb
+  	.insert({
+      	_id: dbname,    	
+				source: repsource,
+				target: reptarget,
+				continuous: true
+      }, 
+      function (err, body) {
+      	console.log(body);
+      }).pipe(res);
+});
+
+
+app.post('/api/dbuseraccess', function(req, res) {
+	var dbname = req.body.dbname;
+	var username = req.body.username;	
+//	var db = cloudant.db.use(dbname);	
+  var path = "_api/v2/db/" + encodeURIComponent(dbname) + "/_security";
+  cloudant.request({
+  	path: path,
+    method: "put",
+    body: {
+			couchdb_auth_only: true,
+			admins: {
+		  	names: [cloudantuser],
+		  	roles:["_admin"]
+		  },
+			members: {
+				names: [username],
+				roles:[]
+			}
+		}},
+		function (err, body) {
+			console.log(err);
+			console.log(body);
+		}).pipe(res)	;	
+});
+
+
+
+
+
+
+
+
 
 
 app.post('/api/setupdb', function(req, res) {
 	var dbname = req.body.dbname;
 	var username = req.body.username;
-	var userdocid = "org.couchdb.user:"+ username;
-	var defaultdb = req.body.defaultdb;
 	var repsource = cloudanturl + '/setup';
 	var reptarget = cloudanturl + '/' + dbname;
 
 	// create DB	
 	cloudant.db
 		.create(dbname, 
+			// configure replication	
 			function (err, body) {
-				if (!err) {
-					// configure replication
+				console.log('create: ',body);
+				if (err) {res.sendStatus(err.statusCode);}
+				else {		
 					replicatordb
 				  	.insert({
 				      	_id: dbname,    	
 								source: repsource,
 								target: reptarget
 				      }, 
+				      // add user to DB's security document
 				      function (err, body) {
-				      	if (!err) {
-				      		// add user to DB's security document
-				      		console.log(body);
+				      	console.log('replicate: ',body);
+				      	if (err) {res.sendStatus(err.statusCode);}
+				      	else {	
 									var newdb = cloudant.db.use(dbname);										
 								  newdb
 								  	.insert(	{
 											  couchdb_auth_only: true,
 											  admins: {
-											    names: [cloudantuser],
-											    roles: ["_admin"]
+											  	names: [cloudantuser],
+											  	roles:["_admin"]
 											  },
 											  members: {
 											    names: [username],
 											    roles:[]
 											  }
-											}, 
+											}, "_security", 
 											function (err, body) {
-												if (!err) {
-													// add database to user's database list
-													console.log(body);
-													userdb
-														.get(userdocid, { revs_info: true }, 
-															function (err, userdoc) {
-															  if (!err) {
-															  	console.log(body);
-															  	var newuserdoc = userdoc;
-															  	newuserdoc.databases.push(dbname);
-															  	if (defaultdb) newuserdoc.defaultdatabase = dbname;
-															  	userdb
-															  		.insert(newuserdoc)
-															  		.pipe(res);															  	
-															  }
-															})
-															.pipe(res);
-												}
-											})
-										.pipe(res);		
+												console.log('security: ',body);
+												if (err) {res.sendStatus(err.statusCode);}
+												else {res.sendStatus(200);}
+											});
 									}
-							})
-						.pipe(res);			    
+							});
 			  }
-			})
-		.pipe(res);
+			});
 });
+
+
+
+
+
+
+
+
+
+
+/**
+function (err, body) {
+	console.log(body);
+	if (!err) {
+		// add database to user's database list
+		console.log(body);
+		userdb
+			.get(userdocid, { revs_info: true }, 
+				function (err, userdoc) {
+					console.log(body);
+				  if (!err) {
+				  	console.log(body);
+				  	var newuserdoc = userdoc;
+				  	newuserdoc.databases.push(dbname);
+				  	if (defaultdb) newuserdoc.defaultdatabase = dbname;
+				  	userdb
+				  		.insert(newuserdoc)
+														  	
+				  }
+				});
+	}
+**/
 
 
 

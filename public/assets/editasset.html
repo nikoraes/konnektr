@@ -1,6 +1,14 @@
 <md-content layout-padding>
 
 	<md-card>
+
+	  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <span>Edit asset</span>
+      </div>
+    </md-toolbar>
+
+
 	
 		<md-card-content>
 
@@ -15,8 +23,8 @@
 			</md-input-container>
 		
 			<md-input-container class="md-block" flex-gt-sm>
-				<label>Category</label>
-				<input ng-model="asset.category" disabled>
+				<label>Categories</label>
+				<input ng-model="asset.categories" disabled>
 			</md-input-container>
 		
 			<div layout="row">

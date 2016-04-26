@@ -1,0 +1,39 @@
+<md-content layout-padding>
+
+  <md-button class="md-fab md-fab-bottom-right" aria-label="Create database" ng-click="$state.go('createdb')">
+    <md-icon>add</md-icon>
+  </md-button>
+
+	<md-card>
+
+	
+	  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <span>Database list</span>
+      </div>
+    </md-toolbar>
+	
+	
+		<md-card-content layout-padding>
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Databases</label>
+        <md-select ng-model="dbname">
+          <md-option ng-repeat="db in couch.server.userDoc.databases" value="{{db}}">
+            {{db}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+		
+			<div layout="row">
+				<md-button class="md-raised" ng-click="setdb()">Go</md-button>
+			</div>
+
+
+
+	
+		</md-card-content>
+		
+	</md-card>
+
+</md-content>

@@ -5,7 +5,7 @@ angular.module('konnektr.user.profile', [])
 		  $stateProvider
 		    .state('profile', {
 		      url: "/profile",
-		      templateUrl: "user/profile/profile.html",
+		      templateUrl: "user/profile.html",
 		      authenticate: true,
 		      resolve: {
 		      	$title: function() { return 'Profile'; }

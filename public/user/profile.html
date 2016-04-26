@@ -1,0 +1,23 @@
+<md-content layout-padding>
+
+	<md-card>
+
+	  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <span>User: {{couch.server.userDoc.name}}</span>
+      </div>
+    </md-toolbar>  
+          
+    <md-card-content layout-padding>     
+			<h3 class="md-subhead">Roles</h2>
+	    <md-chips ng-model="couch.server.userDoc.roles" readonly="true">
+	    </md-chips>        
+			<h3 class="md-subhead">Databases</h2>
+	    <md-chips ng-model="couch.server.userDoc.databases" readonly="true">
+	    </md-chips>
+    </md-card-content>	
+
+	</md-card>
+
+</md-content>
+

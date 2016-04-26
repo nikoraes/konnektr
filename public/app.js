@@ -7,11 +7,15 @@ angular.module('konnektr', [
 	'ui.router.title',
 	'angular-cornercouch',
 	'konnektr.main',
+	'konnektr.assets.assetlist',
+	'konnektr.assets.editasset',
+	'konnektr.user.auth',
+	'konnektr.user.session',
 	'konnektr.user.login',
 	'konnektr.user.profile',
 	'konnektr.user.register',
-	'konnektr.database.create',	
+	'konnektr.databases.createdb',	
+	'konnektr.databases.databaselist',
 	'konnektr.dashboard',
-	'konnektr.explore',
 	'konnektr.trends'
 	]);

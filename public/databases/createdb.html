@@ -1,0 +1,36 @@
+<md-content layout-padding>
+
+	<md-card>
+	
+	
+	  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <span>Create database</span>
+      </div>
+    </md-toolbar>  
+	
+		<md-card-content layout-padding>
+
+	
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>New database name</label>
+				<input ng-model="createdbdata.dbname" required>
+			</md-input-container>
+		
+		  <md-checkbox ng-model="setasdefaultdb">
+		    Set as default
+		  </md-checkbox>
+		
+			<div layout="row">
+				<md-button class="md-raised" ng-click="setupdb()">Setup DB</md-button>
+			</div>
+			
+
+
+			
+	
+		</md-card-content>
+		
+	</md-card>
+
+</md-content>

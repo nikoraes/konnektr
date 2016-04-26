@@ -5,7 +5,7 @@ angular.module('konnektr.user.register', [])
 		  $stateProvider
 		    .state('register', {
 		      url: "/register",
-		      templateUrl: "user/register/register.html",
+		      templateUrl: "user/register.html",
 		      controller: 'RegisterCtrl',
 		      resolve: {
 		      	$title: function() { return 'Register'; }

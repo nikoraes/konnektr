@@ -1,0 +1,67 @@
+
+
+
+<md-content layout-padding>
+
+  <md-button class="md-fab md-fab-bottom-right" aria-label="Create asset>
+    <md-icon>add</md-icon>
+  </md-button>
+
+<!--	
+	<md-card>
+
+
+    <md-toolbar ng-hide="selected.length">
+      <div class="md-toolbar-tools">
+        <span>Asset list</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="getAssets()">
+          <md-icon>refresh</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-toolbar ng-show="selected.length">
+      <div class="md-toolbar-tools">
+        <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+      </div>
+    </md-toolbar>
+	
+
+
+
+		<md-table-container>
+		
+		  <table md-table md-row-select multiple ng-model="selected" md-progress="promise">
+		    <thead md-head>
+		      <tr md-row>
+		        <th md-column><span>ID</span></th>
+		        <th md-column><span>Name</span></th>
+		        <th md-column><span>Categories</span></th>
+		        <th md-column></th>
+		      </tr>
+		    </thead>
+		    <tbody md-body>
+		      <tr md-row md-select="asset" md-select-id="name" md-auto-select ng-repeat="asset in db.rows">
+		        <td md-cell>{{asset.doc._id}}</td>
+		        <td md-cell>{{asset.doc.name}}</td>
+		        <td md-cell><md-chips ng-model="asset.doc.categories" readonly="true"></md-chips></td>
+		        <td>
+		        	<md-button class="md-icon-button">
+			          <md-icon>mode_edit</md-icon>
+			        </md-button>
+		        	<md-button class="md-icon-button">
+			          <md-icon>delete</md-icon>
+			        </md-button>
+      			</td>
+		      </tr>
+		    </tbody>
+		  </table>
+		</md-table-container>
+
+		
+	</md-card>
+-->
+</md-content>
+
+

@@ -1,11 +1,11 @@
-angular.module('konnektr.assets.edit', [])
+angular.module('konnektr.assets.editasset', [])
 		
 	.config(['$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {
 		  $stateProvider
-		    .state('assets.edit', {
+		    .state('editasset', {
 		      url: "/assets/edit",
-		      templateUrl: "assets/edit/edit.html",
+		      templateUrl: "assets/editasset.html",
 		      controller: 'EditAssetCtrl',
 		      authenticate: true,
 		      resolve: {
@@ -19,7 +19,7 @@ angular.module('konnektr.assets.edit', [])
 			$scope.asset = {
 				_id: 'test-12345',
 				name: 'Test',
-				category: 'category'
+				categories: []
 			};		
 
 

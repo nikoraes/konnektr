@@ -1,12 +1,12 @@
-angular.module('konnektr.assets', [])
+angular.module('konnektr.assets.assetlist', [])
 		
 	.config(['$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {
 		  $stateProvider
-		    .state('assets', {
+		    .state('assetlist', {
 		      url: "/assets",
-		      templateUrl: "assets/assets.html",
-		      controller: 'AssetCtrl',
+		      templateUrl: "assets/assetlist.html",
+		      controller: 'AssetListCtrl',
 		      authenticate: true,
 		      resolve: {
 		      	$title: function() { return 'Assets'; }
@@ -14,16 +14,19 @@ angular.module('konnektr.assets', [])
 		    });
 		}])
 
-	.controller('AssetCtrl', ['$scope', '$state', 'couch',
-		function ($scope, $state, $http, couch) {
+	.controller('AssetListCtrl', ['$scope', '$state', 'couch',
+		function ($scope, $state, couch) {
+
 			$scope.selected = [];
-			
+
 			$scope.db = couch.getDB();
 			
 			$scope.getAssets = function () {
-				$scope.db.query("konnektr-api", "assets", { include_docs: true });			
+				$scope.db.query("konnektr", "assets", { include_docs: true });			
 			};
+			
+			$scope.getAssets();
+			
 		}]) 
 ;	
-	
 	

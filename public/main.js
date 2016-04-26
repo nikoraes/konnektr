@@ -3,59 +3,13 @@ angular.module('konnektr.main', [])
 	/** Theme **/
 	.config(['$mdThemingProvider', function($mdThemingProvider) {
 	  $mdThemingProvider.theme('default')
-	    .primaryPalette('grey')
-	    .accentPalette('deep-orange');
+	    .primaryPalette('grey', {
+      'default': '900'
+    })
+	    .accentPalette('red', {
+      'default': 'A700'
+    });
 	}])
-
-
-	/** Authentication and session **/
-
-	.service('auth', [ '$http', '$state', 'session', 'couch',
-		function ($http, $state, session, couch) {
-			this.isLoggedIn = function () {
-				return session.getUserName() !== null;
-			};
-			this.logIn = function (credentials) {
-				return couch.server.login(credentials.username, credentials.password)
-					.then(function (response) {
-						session.create(couch.server.userCtx);
-					});		
-			};
-			this.logOut = function () {
-				session.destroy();
-				couch.server.logout();
-				couch.setDB(null);
-				$state.go('login');
-    	};  
-    	this.register = function (credentials) {
-	      return $http
-	        .post('/api/register', credentials);    		
-    	};
-		}])
-
-	.service('session', function () {				
-		this.getUserName = function () {
-			return this.userName;
-		};
-		this.getUserRoles = function () {
-			return this.userRoles;
-		};			
-	  this.create = function (userCtx) {
-	    this.userName = userCtx.name;
-	    this.userRoles = userCtx.roles;
-	  };	  
-	  this.destroy = function () {
-	    this.userName = null;
-	    this.userRoles = null;
-	  };
-	})
-
-	.run(['$rootScope', 'auth', 'session',
-		function ($rootScope, auth, session) {
-	    auth.logOut();
-	    $rootScope.auth = auth;
-	    $rootScope.session = session;    	    
-		}])
 
 
 	/** Router **/	
@@ -116,7 +70,7 @@ angular.module('konnektr.main', [])
 				this.dbName = dbName; 
 				if (dbName) {
 					this.db = this.server.getDB(dbName);
-				};
+				} else {this.db = null;}
 				return this.db;
 			};
 			
@@ -127,10 +81,6 @@ angular.module('konnektr.main', [])
 			this.getDBname = function () {
 				return this.dbName;
 			};
-
-			this.getUserDoc = function () {
-				return this.server.getUserDoc;
-			};
 			
 		}])
 
@@ -138,9 +88,6 @@ angular.module('konnektr.main', [])
 		function ($rootScope, couch) {
 	    $rootScope.couch = couch; 
 		}])
-
-
-
 
 
   .controller('MainCtrl', ['$scope', '$mdSidenav',
