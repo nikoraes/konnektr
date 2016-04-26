@@ -8,7 +8,7 @@ angular.module('konnektr.user.profile', [])
 		      templateUrl: "user/profile.html",
 		      authenticate: true,
 		      resolve: {
-		      	$title: function() { return 'Profile'; }
+		      	$title: ['couch', function(couch) { return 'Profile:  ' + couch.server.userDoc.name; }]
 		      }
 		    });
 		}])
