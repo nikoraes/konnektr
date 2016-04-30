@@ -14,18 +14,19 @@ angular.module('konnektr.assets.assetlist', [])
 		    });
 		}])
 
-	.controller('AssetListCtrl', ['$scope', '$state', 'couch',
-		function ($scope, $state, couch) {
+	.controller('AssetListCtrl', ['$scope', '$state', '$mdDialog', 'couch',
+		function ($scope, $state, $mdDialog, couch) {
 
 			$scope.selected = [];
-
-			$scope.db = couch.getDB();
 			
 			$scope.getAssets = function () {
-				$scope.db.query("konnektr", "assets", { include_docs: true });			
+				couch.db.query("konnektr", "assets", { include_docs: true });			
 			};
 			
 			$scope.getAssets();
+
+
+
 			
 		}]) 
 ;	

@@ -9,6 +9,7 @@ angular.module('konnektr', [
 	'konnektr.main',
 	'konnektr.assets.assetlist',
 	'konnektr.assets.editasset',
+	'konnektr.assets.createasset',
 	'konnektr.user.auth',
 	'konnektr.user.session',
 	'konnektr.user.login',

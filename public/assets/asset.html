@@ -1,0 +1,29 @@
+<md-content layout-padding layout="column" flex flex-md="50" flex-lg="50" flex-gt-lg="33">
+    <form name="assetForm">
+			<h3 class="md-subhead">ID</h3>
+      <md-input-container class="md-block">
+          <input ng-model="asset._id" aria-label="ID" disabled>
+      </md-input-container>
+      
+      <h3 class="md-subhead">Name</h3>
+      <md-input-container class="md-block">
+          <input ng-model="asset.name" aria-label="Name" >
+      </md-input-container>
+      
+      <h3 class="md-subhead">Categories</h3>
+  	  <md-chips ng-model="asset.categories" name="categories" placeholder="Add category" required></md-chips>				
+			<br />
+
+      <h3 class="md-subhead">Location</h3>
+      <md-input-container class="md-block">
+          <input ng-model="asset.location" aria-label="Location" >
+      </md-input-container>
+			
+			<div layout="row">
+				<md-button class="md-raised" ng-click="asset.save()">Save</md-button>
+				<md-button ng-show="$state.includes('editasset')" ng-click="asset.remove()">Delete</md-button>
+			</div>
+    </form>
+</md-content>
+
+

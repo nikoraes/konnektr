@@ -1,8 +1,6 @@
 <md-content flex layout="row">
 
-  <md-button class="md-fab md-fab-bottom-right" aria-label="Create database" ng-click="$state.go('createdb')">
-    <md-icon>add</md-icon>
-  </md-button>
+
 
 
 
@@ -18,16 +16,13 @@
 	      </tr>
 	    </thead>
 	    <tbody md-body>
-	      <tr md-row md-select="asset" md-select-id="name" ng-repeat="asset in db.rows">
+	      <tr md-row md-select="asset" md-select-id="name" ng-repeat="asset in couch.db.rows">
 	        <td md-cell>{{asset.doc._id}}</td>
 	        <td md-cell>{{asset.doc.name}}</td>
-	        <td md-cell><md-chips ng-model="asset.doc.categories" readonly="true"></md-chips></td>
+	        <td md-cell>{{asset.doc.categories.join(', ')}}</td>
 	        <td md-cell>
 	        	<md-button class="md-icon-button" ng-click="$state.go('editasset',{asset_id:asset.doc._id})">
 		          <md-icon>mode_edit</md-icon>
-		        </md-button>
-	        	<md-button class="md-icon-button">
-		          <md-icon>delete</md-icon>
 		        </md-button>
     			</td>
 	      </tr>
@@ -35,6 +30,9 @@
 	  </table>
 	</md-table-container>
 
-
 	
 </md-content>
+
+<md-button class="md-fab md-fab-bottom-right" aria-label="Create database" ng-click="$state.go('createasset')">
+  <md-icon>add</md-icon>
+</md-button>

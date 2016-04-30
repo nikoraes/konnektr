@@ -4,7 +4,7 @@ angular.module('konnektr.database.database', [])
 		function($stateProvider, $urlRouterProvider) {
 		  $stateProvider
 		    .state('databaselist', {
-		      url: "/database/list",
+		      url: "/database",
 		      templateUrl: "database/database.html",
 		      controller: 'DatabaseCtrl',
 		      authenticate: true,

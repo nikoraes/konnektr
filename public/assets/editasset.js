@@ -5,33 +5,25 @@ angular.module('konnektr.assets.editasset', [])
 		  $stateProvider
 		    .state('editasset', {
 		      url: "/assets/{asset_id}",
-		      templateUrl: "assets/editasset.html",
+		      templateUrl: "assets/asset.html",
 		      controller: 'EditAssetCtrl',
 		      authenticate: true,
 		      resolve: {
-		      	$title: function() { return 'Edit Asset'; }
+		      	$title: function() { return 'Edit Asset'; },
+		      	asset: function($stateParams, couch) {
+		      		var assetDoc = couch.db.newDoc();		  		      		
+		      		return assetDoc.load($stateParams.asset_id)
+		      			.then(function(){
+			      			return assetDoc;
+		      			});	      		
+		      	}
 		      }
 		    });
 		}])
 
-	.controller('EditAssetCtrl', ['$scope', '$stateParams', 'couch',
-		function ($scope, $stateParams, couch) {
-
-			// TODO insert in resolve, to remove error from chips
-
-			$scope.asset = {
-				_id: "",
-				name: "",
-				categories: []
-			};
-			
-			$scope.asset = [];
-
-			$scope.db = couch.getDB();
-
-			$scope.asset = $scope.db.getDoc($stateParams.asset_id);
-
-    	
+	.controller('EditAssetCtrl', ['$scope', 'asset',
+		function ($scope, asset) {
+			$scope.asset = asset;
 		}]) 
 ;	
 	
