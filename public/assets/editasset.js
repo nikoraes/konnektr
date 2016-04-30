@@ -4,7 +4,7 @@ angular.module('konnektr.assets.editasset', [])
 		function($stateProvider, $urlRouterProvider) {
 		  $stateProvider
 		    .state('editasset', {
-		      url: "/assets/edit",
+		      url: "/assets/{asset_id}",
 		      templateUrl: "assets/editasset.html",
 		      controller: 'EditAssetCtrl',
 		      authenticate: true,
@@ -14,14 +14,22 @@ angular.module('konnektr.assets.editasset', [])
 		    });
 		}])
 
-	.controller('EditAssetCtrl', ['$scope', '$state', 'couch',
-		function ($scope, $state, $http, couch) {
-			$scope.asset = {
-				_id: 'test-12345',
-				name: 'Test',
-				categories: []
-			};		
+	.controller('EditAssetCtrl', ['$scope', '$stateParams', 'couch',
+		function ($scope, $stateParams, couch) {
 
+			// TODO insert in resolve, to remove error from chips
+
+			$scope.asset = {
+				_id: "",
+				name: "",
+				categories: []
+			};
+			
+			$scope.asset = [];
+
+			$scope.db = couch.getDB();
+
+			$scope.asset = $scope.db.getDoc($stateParams.asset_id);
 
     	
 		}]) 

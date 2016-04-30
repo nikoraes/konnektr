@@ -1,18 +1,53 @@
-<md-content layout-padding>
+<md-content flex layout="row">
 
-	<md-card>
+	<md-list flex flex-md="50" flex-lg="50" flex-gt-lg="33">
+	
+	  <md-list-item class="md-2-line">
+		  <div class="md-list-item-text">
+		  	<h3>Account</h3>
+		    <p>{{couch.server.userDoc.name}}</p>
+	    </div>
+	  </md-list-item>
 
-          
-    <md-card-content layout-padding>     
-			<h3 class="md-subhead">Roles</h2>
-	    <md-chips ng-model="couch.server.userDoc.roles" readonly="true">
-	    </md-chips>        
-			<h3 class="md-subhead">Databases</h2>
-	    <md-chips ng-model="couch.server.userDoc.databases" readonly="true">
-	    </md-chips>
-    </md-card-content>	
+	  <md-list-item>
+	    <p>Change password</p>
+	  </md-list-item>
 
-	</md-card>
+		<md-divider></md-divider>
+		
+	  <md-list-item class="md-2-line" ng-click="dbdialog($event)">
+	  	<div class="md-list-item-text">
+		  	<h3>Active database</h3>
+		  	<p>{{couch.getDBname()}}</p> 
+	    </div>
+	  </md-list-item> 		
+
+	  <md-list-item class="md-2-line">
+	  	<div class="md-list-item-text">
+		  	<h3>Roles</h3>
+		  	<p>{{couch.server.userDoc.roles.join(', ')}}</p>
+	    </div>
+	  </md-list-item>         
+
+		<md-divider></md-divider>
+
+	  <md-list-item class="md-2-line">
+	  	<div class="md-list-item-text">
+		  	<h3>Databases</h3>
+		  	<p>{{couch.server.userDoc.databases.join(', ')}}</p> 
+	    </div>
+	    <md-icon class="md-secondary" ng-click="$state.go('createdb')" aria-label="create database">add</md-icon>
+	  </md-list-item> 
+	  
+	  <md-list-item class="md-2-line" ng-click="showAlert($event)">
+	  	<div class="md-list-item-text">
+		  	<h3>Default database</h3>
+		  	<p>{{couch.server.userDoc.defaultdatabase}}</p> 
+	    </div>
+	  </md-list-item> 
+	  
+	</md-list>
+	
 
 </md-content>
 

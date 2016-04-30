@@ -1,11 +1,11 @@
-angular.module('konnektr.databases.createdb', [])
+angular.module('konnektr.database.createdb', [])
 		
 	.config(['$stateProvider', '$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider) {
 		  $stateProvider
 		    .state('createdb', {
-		      url: "/databases/createdb",
-		      templateUrl: "databases/createdb.html",
+		      url: "/database/createdb",
+		      templateUrl: "database/createdb.html",
 		      controller: 'CreateDBCtrl',
 		      authenticate: true,
 		      resolve: {
@@ -35,9 +35,11 @@ angular.module('konnektr.databases.createdb', [])
 		        	if ($scope.setasdefaultdb) couch.server.userDoc.defaultdatabase = $scope.createdbdata.dbname;      	
 		   				couch.server.userDoc.save();
 		        	couch.setDB($scope.createdbdata.dbname);	        	
-	        	}, function (response) {
-		        	console.log(response);     
-		        	$scope.response = response;	        		
+	        	}, function (err) {
+		        	console.log(err);     
+		        	$scope.error = err;	  
+		        	$scope.createDatabaseForm.email.$setValidity('server', false);
+							$scope.createDatabaseForm.password.$setValidity('server', false);
 	        	});
     	};
 

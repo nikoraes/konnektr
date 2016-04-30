@@ -14,8 +14,8 @@ angular.module('konnektr', [
 	'konnektr.user.login',
 	'konnektr.user.profile',
 	'konnektr.user.register',
-	'konnektr.databases.createdb',	
-	'konnektr.databases.databaselist',
+	'konnektr.database.createdb',	
+	'konnektr.database.database',
 	'konnektr.dashboard',
 	'konnektr.trends'
 	]);

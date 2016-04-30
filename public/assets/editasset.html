@@ -1,32 +1,29 @@
-<md-content layout-padding>
+<md-content flex layout="row">
 
-	<md-card>
+	<md-list flex flex-md="50" flex-lg="50" flex-gt-lg="33">
 
+	  <md-list-item class="md-2-line">
+		  <div class="md-list-item-text">
+		  	<h3>Asset ID</h3>
+		    <p>{{asset._id}}</p>
+	    </div>
+	  </md-list-item>
 
-	
-		<md-card-content layout-padding>
-
-			<md-input-container class="md-block" flex-gt-sm>
-				<label>ID</label>
-				<input ng-model="asset._id" disabled>
-			</md-input-container>
-		
-			<md-input-container class="md-block" flex-gt-sm>
-				<label>Name</label>
-				<input ng-model="asset.name" disabled>
-			</md-input-container>
-		
-			<md-input-container class="md-block" flex-gt-sm>
-				<label>Categories</label>
-				<input ng-model="asset.categories" disabled>
-			</md-input-container>
-		
-			<div layout="row">
-				<md-button class="md-raised md-primary">Save</md-button>
-			</div>
-	
-		</md-card-content>
-		
-	</md-card>
+	  <md-list-item class="md-2-line">
+		  <div class="md-list-item-text">
+		  	<h3>Asset name</h3>
+		    <p>{{asset.name}}</p>
+	    </div>
+	  </md-list-item>
+	  
+	  <md-list-item class="md-2-line">
+		  <div class="md-list-item-text">
+		  	<h3>Categories</h3>
+		    <p>{{asset.categories.join(', ')}}</p>
+	    </div>
+	  </md-list-item>
+	  
+	</md-list>
 
 </md-content>
+

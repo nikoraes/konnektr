@@ -1,0 +1,18 @@
+<md-dialog aria-label="Select database">
+  <md-dialog-content layout-padding>
+    <h2 class="md-title">Select active database</h2>
+		<md-input-container class="md-block" flex-gt-sm>
+      <label>Databases</label>
+      <md-select ng-model="dbname">
+        <md-option ng-repeat="db in couch.server.userDoc.databases" value="{{db}}">
+          {{db}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <span flex></span>
+    <md-button ng-click="canceldialog()">Cancel</md-button>
+    <md-button ng-click="setdbdialog()">Select</md-button>
+  </md-dialog-actions>
+</md-dialog>

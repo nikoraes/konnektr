@@ -57,11 +57,11 @@
       </md-list-item>
       <md-list-item>
         <md-icon>cloud_circle</md-icon>
-        <p>Open Data</p>
+        <p>Open data</p>
       </md-list-item>
       <md-list-item>
         <md-icon>device_hub</md-icon>
-        <p>Data Sources</p>
+        <p>Data sources</p>
       </md-list-item>
       <md-list-item ng-click="$state.go('assetlist')">
         <md-icon>developer_board</md-icon>
@@ -69,7 +69,7 @@
       </md-list-item>
       <md-list-item>
         <md-icon>blur_on</md-icon>
-        <p>Data Points</p>
+        <p>Data points</p>
       </md-list-item>
       <md-list-item>
         <md-icon>map</md-icon>
@@ -78,11 +78,6 @@
       <md-list-item>
         <md-icon>show_chart</md-icon>
         <p>Trends</p>
-      </md-list-item>
-      <md-divider></md-divider>
-      <md-list-item ng-click="$state.go('databaselist')">
-        <md-icon>storage</md-icon>
-        <p>Databases</p>
       </md-list-item>
       <md-divider></md-divider>
       <div show-gt-sm>
@@ -102,9 +97,9 @@
 
   <div flex layout="column" role="main">
 
-    <md-toolbar class="md-whiteframe-z4" layout="row">
+    <md-toolbar class="md-whiteframe-z4" layout="row" ng-show="auth.isLoggedIn()" >
     	<div class="md-toolbar-tools">
-	      <md-button class="md-icon-button" id="main" class="menu" hide-gt-sm ng-show="auth.isLoggedIn()" ng-click="toggleSidenav()">
+	      <md-button class="md-icon-button" id="main" class="menu" hide-gt-sm ng-click="toggleSidenav()">
 	        <md-icon>menu</md-icon>
 	      </md-button>
 	      <h2 class="md-title">
@@ -164,8 +159,8 @@
 	
 	<script src="dashboard/dashboard.js"></script>
 	
-	<script src="databases/createdb.js"></script>	
-	<script src="databases/databaselist.js"></script>	
+	<script src="database/createdb.js"></script>	
+	<script src="database/database.js"></script>	
 	
 	<script src="trends/trends.js"></script>  
 	

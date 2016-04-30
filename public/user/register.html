@@ -1,14 +1,16 @@
 <div flex layout="row" layout-align="center center" layout-margin>	
-  <div flex-sm="100" flex-gt-sm="60" flex-gt-md="40" flex-gt-lg="20" class="md-whiteframe-z2">
-    <md-toolbar">
+
+  <md-whiteframe flex flex-md="50" flex-lg="50" flex-gt-lg="33" class="md-whiteframe-z2">
+  
+    <md-toolbar>
     	<span flex></span>
       <h1 class="md-toolbar-tools">
         <span class="md-flex">Register</span>
       </h1>
     </md-toolbar>
-
     
 		<div layout="column" class="md-inline-form">
+		
 			 <md-content layout-padding> 
 
 					<form name="registerForm">
@@ -29,18 +31,17 @@
 						</md-input-container>
 	
 						<div layout="row">
-							<md-button class="md-raised" ng-click="register()">Register</md-button>
+							<span flex></span>
 							<md-button ng-click="$state.go('login')">Login</md-button>
+							<md-button class="md-raised" ng-click="register()">Register</md-button>
 						</div>
-
 						
 					</form>
 
 			</md-content>
+			
 		</div>
 
-
-	
-	</div>
+	</md-whiteframe>
 
 </div>

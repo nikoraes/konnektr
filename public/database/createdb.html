@@ -1,15 +1,15 @@
 <md-content layout-padding>
 
-	<md-card>
-	
+	<div layout="column" flex flex-md="50" flex-lg="50" flex-gt-lg="33">
 
-	
-		<md-card-content layout-padding>
-
+		<form name="createDatabaseForm">
 	
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>New database name</label>
-				<input ng-model="createdbdata.dbname" required>
+				<input name="dbname" ng-model="createdbdata.dbname" required>
+				<div ng-messages="createDatabaseForm.dbname.$error">
+          <div ng-message="server">{{error.data.reason}}</div>
+        </div>
 			</md-input-container>
 		
 		  <md-checkbox ng-model="setasdefaultdb">
@@ -20,12 +20,8 @@
 				<md-button class="md-raised" ng-click="setupdb()">Setup DB</md-button>
 			</div>
 			
-
-
-			
-	
-		</md-card-content>
+		</form>
 		
-	</md-card>
+	</div>
 
 </md-content>
