@@ -63,7 +63,7 @@
         <md-icon>device_hub</md-icon>
         <p>Data sources</p>
       </md-list-item>
-      <md-list-item ng-click="$state.go('assetlist')">
+      <md-list-item ng-click="$state.go('assets')">
         <md-icon>developer_board</md-icon>
         <p>Assets</p>
       </md-list-item>
@@ -135,8 +135,9 @@
 
 
  
+
  
-  
+  <!-- external -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
@@ -144,25 +145,39 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>  
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>	
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material-data-table/0.10.5/md-data-table.min.js"></script>	
-  
-	<script src="app.js"></script>
+
+	<!-- bootstrap -->
+	<script src="app.module.js"></script>
+  	
+	<script src="core/ui-router-title.js"></script>
+	<script src="core/angular-cornercouch.js"></script>
 	
-	<script src="common/ui-router-title.js"></script>
-	<script src="common/cornercouch.js"></script>
+	<!-- core -->
+	<script src="core/core.module.js"></script>
+	<script src="core/couch.js"></script>
 	
 	<script src="main.js"></script>
 	
-	<script src="assets/assetlist.js"></script>
-	<script src="assets/editasset.js"></script>
-	<script src="assets/createasset.js"></script>
+	<!-- assets -->
+	<script src="assets/assets.module.js"></script>
+	<script src="assets/assets.controller.js"></script>
+	<script src="assets/assets.route.js"></script>
+	<script src="assets/asset-edit.controller.js"></script>
+	<script src="assets/asset-edit.route.js"></script>
+	<script src="assets/asset-create.controller.js"></script>
+	<script src="assets/asset-create.route.js"></script>
 	
+	<!-- dashboard -->
 	<script src="dashboard/dashboard.js"></script>
 	
+	<!-- database -->
 	<script src="database/createdb.js"></script>	
 	<script src="database/database.js"></script>	
 	
+	<!-- trends -->
 	<script src="trends/trends.js"></script>  
 	
+	<!-- user -->
 	<script src="user/auth.js"></script>
 	<script src="user/session.js"></script>
 	<script src="user/login.js"></script>

@@ -1,27 +1,42 @@
-<md-content layout-padding layout="column" flex flex-md="50" flex-lg="50" flex-gt-lg="33">
+<md-content layout-padding layout="column">
     <form name="assetForm">
-			<h3 class="md-subhead">ID</h3>
-      <md-input-container class="md-block">
-          <input ng-model="asset._id" aria-label="ID" disabled>
-      </md-input-container>
-      
-      <h3 class="md-subhead">Name</h3>
-      <md-input-container class="md-block">
-          <input ng-model="asset.name" aria-label="Name" >
-      </md-input-container>
-      
-      <h3 class="md-subhead">Categories</h3>
-  	  <md-chips ng-model="asset.categories" name="categories" placeholder="Add category" required></md-chips>				
-			<br />
-
-      <h3 class="md-subhead">Location</h3>
-      <md-input-container class="md-block">
-          <input ng-model="asset.location" aria-label="Location" >
-      </md-input-container>
+    
+			<div layout="column">
 			
-			<div layout="row">
-				<md-button class="md-raised" ng-click="asset.save()">Save</md-button>
-				<md-button ng-show="$state.includes('editasset')" ng-click="asset.remove()">Delete</md-button>
+				<div layout="row">   
+		      <md-input-container>
+		      		<label>ID</label>
+		          <input ng-model="vm.asset._id" disabled>
+		      </md-input-container>     
+	      </div>
+	      <div layout="row"> 
+		      <md-input-container>
+		          <label>Name</label>
+		          <input ng-model="vm.asset.name">
+		      </md-input-container>
+	      </div>
+	      <div layout="row">
+		      <md-input-container>
+		          <label>Location</label>
+		          <input ng-model="vm.asset.location">
+		      </md-input-container>  
+	      </div>
+	    	<div layout="row">
+		      <md-input-container>
+		        <label>Asset type</label>
+		        <md-select ng-model="vm.asset.assetType">
+		          <md-option ng-repeat="type in vm.assetTypes" value="{{type.title}}">{{type.title}}</md-option>
+		        </md-select>
+		      </md-input-container>			
+	      </div>
+	      
+				<br />			
+				
+				<div layout="row">
+					<md-button class="md-raised" ng-click="vm.asset.save()">Save</md-button>
+					<md-button ng-show="$state.includes('edit')" ng-click="vm.asset.remove()">Delete</md-button>
+				</div>
+			
 			</div>
     </form>
 </md-content>

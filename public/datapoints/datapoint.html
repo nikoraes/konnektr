@@ -1,60 +1,42 @@
-<md-content layout-padding layout="column" flex flex-md="50" flex-lg="50" flex-gt-lg="33">
+<md-content layout-padding layout="column">
     <form name="datapointForm">
-			<h3 class="md-subhead">ID</h3>
-      <md-input-container class="md-block">
-          <input ng-model="datapoint._id" aria-label="ID" disabled>
-      </md-input-container>
-      
-      <h3 class="md-subhead">Name</h3>
-      <md-input-container class="md-block">
-          <input ng-model="datapoint.name" aria-label="Name" >
-      </md-input-container>
-      
-      <h3 class="md-subhead">Categories</h3>
-  	  <md-chips ng-model="datapoint.categories" name="categories" placeholder="Add Category" required></md-chips>				
-<!--
-
-      <h3 class="md-subhead">Parent assets</h3>
-  	  <md-chips ng-model="datapoint.asset_ids" md-autocomplete-snap  name="asset_ids" 
-  	  	md-transform-chip="transformChip($chip)"
-        md-require-match="true">
-  	  	<md-autocomplete
-          md-selected-item="selectedItem"
-          md-search-text="searchText"
-          md-items="asset in querySearch(searchText)"
-          md-item-text="asset.name"
-          placeholder="Add existing asset">
-        	<span md-highlight-text="searchText">{{item.name}} :: {{item.type}}</span>
-      	</md-autocomplete>
-  	  </md-chips>		
--->
-
-			<div layout="row">
-
-	      <h3 class="md-subhead">Physical quantity</h3>
-	      <md-input-container class="md-block">
-	          <input ng-model="datapoint.quantity" aria-label="quantity" >
-	      </md-input-container>
-	
-	      <h3 class="md-subhead">Unit</h3>
-	      <md-input-container class="md-block">
-	          <input ng-model="datapoint.unit" aria-label="unit" >
-	      </md-input-container>
-
-			</div>
-
-
-
-
-
-			<br />
-
+    
+			<div layout="column">
 			
-			<div layout="row">
-				<md-button class="md-raised" ng-click="datapoint.save()">Save</md-button>
-				<md-button ng-show="$state.includes('editdatapoint')" ng-click="datapoint.remove()">Delete</md-button>
+				<div layout="row">   
+		      <md-input-container>
+		      		<label>ID</label>
+		          <input ng-model="vm.datapoint._id" disabled>
+		      </md-input-container>     
+	      </div>
+	      <div layout="row"> 
+		      <md-input-container>
+		          <label>Name</label>
+		          <input ng-model="vm.datapoint.name">
+		      </md-input-container>
+	      </div>
+	    	<div layout="row">
+		      <md-input-container>
+		        <label>Property</label>
+		        <md-select ng-model="vm.datapoint.property">
+		          <md-option ng-repeat="property in vm.properties" value="{{property.title}}">{{property.title}}</md-option>
+		        </md-select>
+		      </md-input-container>		
+		      <md-input-container>
+		        <label>Unit</label>
+		        <md-select ng-model="vm.datapoint.unit">
+		          <md-option ng-repeat="unit in vm.units" value="{{unit.title}}">{{unit.title}}</md-option>
+		        </md-select>
+		      </md-input-container>			
+	      </div>
+	      
+				<br />			
+				
+				<div layout="row">
+					<md-button class="md-raised" ng-click="vm.datapoint.save()">Save</md-button>
+					<md-button ng-show="$state.includes('edit')" ng-click="vm.datapoint.remove()">Delete</md-button>
+				</div>
+			
 			</div>
     </form>
 </md-content>
-
-
