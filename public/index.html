@@ -50,7 +50,8 @@
       </div>
     </md-toolbar>
 
-    <md-list class="md-hue-2" >
+    <md-list>
+    <!--
       <md-list-item ng-click="$state.go('dashboard')">
         <md-icon>dashboard</md-icon>
         <p>Dashboard</p>
@@ -59,7 +60,8 @@
         <md-icon>cloud_circle</md-icon>
         <p>Open data</p>
       </md-list-item>
-      <md-list-item>
+      -->
+      <md-list-item ng-click="$state.go('datasources')">
         <md-icon>device_hub</md-icon>
         <p>Data sources</p>
       </md-list-item>
@@ -67,18 +69,20 @@
         <md-icon>developer_board</md-icon>
         <p>Assets</p>
       </md-list-item>
-      <md-list-item>
+      <md-list-item ng-click="$state.go('datapoints')" ng-class="$state.includes('datapoints') ? 'active' : false">
         <md-icon>blur_on</md-icon>
         <p>Data points</p>
       </md-list-item>
+      <!--
       <md-list-item>
         <md-icon>map</md-icon>
         <p>Maps</p>
-      </md-list-item>
+      </md-list-item>      
       <md-list-item>
         <md-icon>show_chart</md-icon>
         <p>Trends</p>
       </md-list-item>
+      -->
       <md-divider></md-divider>
       <div show-gt-sm>
 	      <md-list-item ng-click="$state.go('profile')">
@@ -169,10 +173,23 @@
 	
 	<!-- dashboard -->
 	<script src="dashboard/dashboard.js"></script>
+
+	<!-- datapoints -->
+	<script src="datapoints/datapoints.module.js"></script>
+	<script src="datapoints/datapoints.controller.js"></script>
+	<script src="datapoints/datapoints.route.js"></script>
+	<script src="datapoints/datapoint-edit.controller.js"></script>
+	<script src="datapoints/datapoint-edit.route.js"></script>
+	<script src="datapoints/datapoint-create.controller.js"></script>
+	<script src="datapoints/datapoint-create.route.js"></script>
 	
 	<!-- database -->
 	<script src="database/createdb.js"></script>	
 	<script src="database/database.js"></script>	
+
+	<!-- datasources -->
+	<script src="datasources/datasources.module.js"></script>
+	<script src="datasources/datasources.route.js"></script>
 	
 	<!-- trends -->
 	<script src="trends/trends.js"></script>  

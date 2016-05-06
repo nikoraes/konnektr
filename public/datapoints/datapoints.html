@@ -15,15 +15,12 @@
 	      </tr>
 	    </thead>
 	    <tbody md-body>
-	      <tr md-row md-select="asset" md-select-id="name" ng-repeat="asset in couch.db.rows">
-	        <td md-cell>{{asset.doc._id}}</td>
-	        <td md-cell>{{asset.doc.name}}</td>
+	      <tr md-row md-select="datapoint" md-select-id="name" ng-repeat="datapoint in couch.db.rows">
+	        <td md-cell>{{datapoint.doc._id}}</td>
+	        <td md-cell>{{datapoint.doc.name}}</td>
 	        <td md-cell>
-	        	<md-button class="md-icon-button" ng-click="$state.go('asset-edit',{assetId:asset.doc._id})">
+	        	<md-button class="md-icon-button" ng-click="$state.go('datapoint-edit',{datapointId:datapoint.doc._id})">
 		          <md-icon>mode_edit</md-icon>
-		        </md-button>
-		        <md-button class="md-icon-button" ng-click="vm.confirmDelete($event,asset)">
-		          <md-icon>delete</md-icon>
 		        </md-button>
     			</td>
 	      </tr>
@@ -34,6 +31,6 @@
 	
 </md-content>
 
-<md-button class="md-fab md-fab-bottom-right" aria-label="Create asset" ng-click="$state.go('asset-create')">
+<md-button class="md-fab md-fab-bottom-right" aria-label="Create datapoint" ng-click="$state.go('datapoint-create')">
   <md-icon>add</md-icon>
 </md-button>

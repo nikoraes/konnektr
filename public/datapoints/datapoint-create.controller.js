@@ -4,8 +4,8 @@
 	angular.module('konnektr.datapoints')		
 		.controller('DatapointCreateController', DatapointCreateController);	
 		
-	DatapointCreateController.$inject = ['$scope', 'asset'];
-	function DatapointCreateController($scope, asset) {	
+	DatapointCreateController.$inject = ['$scope', 'datapoint'];
+	function DatapointCreateController($scope, datapoint) {	
 		var vm = this;	
 		vm.datapoint = datapoint;			
 		vm.properties = [

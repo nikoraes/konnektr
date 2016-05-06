@@ -5,6 +5,8 @@
 		'konnektr.core',
 		'konnektr.main',
 		'konnektr.assets',
+		'konnektr.datapoints',
+		'konnektr.datasources',		
 		'konnektr.user.auth',
 		'konnektr.user.session',
 		'konnektr.user.login',

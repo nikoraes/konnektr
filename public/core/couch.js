@@ -28,6 +28,18 @@
 			this.getDBname = function () {
 				return this.dbName;
 			};
+
+// TODO Change getDoc in cornercouch instead
+			this.getAssetDoc = function getAssetDoc(assetId) {
+				var assetDoc = this.db.newDoc();		  		      		
+				return assetDoc.load(assetId)
+					.then(function(){
+						return assetDoc;
+					});	
+			}
+
+
+
 			
 		}])
 

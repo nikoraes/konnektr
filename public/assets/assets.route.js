@@ -14,7 +14,7 @@
 		    controllerAs: 'vm',
 		    authenticate: true,
 		    resolve: {
-		    	$title: function() { return 'assets'; }
+		    	$title: function() { return 'Assets'; }
 	      }
 	    });
 	}

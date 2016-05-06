@@ -13,8 +13,8 @@ angular.module('konnektr.user.register', [])
 		    });
 		}])
 
-	.controller('RegisterCtrl', ['$scope', '$state', '$http', 'auth', 'couch',
-		function ($scope, $state, $http, auth, couch) {
+	.controller('RegisterCtrl', ['$scope', '$state', 'auth',
+		function ($scope, $state, auth) {
 			$scope.credentials = {
 				username: '',
 				password: ''

@@ -28,7 +28,7 @@ angular.module('konnektr.user.login', [])
 						$timeout(function() {}, 800).then(function() {
 							if (couch.server.userDoc.defaultdatabase) {						
 								couch.setDB(couch.server.userDoc.defaultdatabase);
-								$state.go('dashboard');
+								$state.go('assets');
 							} else {
 								$state.go('createdb');
 							}	
